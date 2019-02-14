@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
 import edu.wpi.first.wpilibj.Compressor;
 import frc.robot.subsystems.*;
 
@@ -24,7 +23,6 @@ import frc.robot.subsystems.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
   public static Actuator m_Actuator = new Actuator();
   public static BackIntake m_BackIntake = new BackIntake();
@@ -46,7 +44,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     m_Actuator = new Actuator();
     m_BackIntake = new BackIntake();
