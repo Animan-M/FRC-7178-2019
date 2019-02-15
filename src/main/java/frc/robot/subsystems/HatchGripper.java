@@ -30,8 +30,8 @@ public class HatchGripper extends Subsystem {
   }
 
   public void Gripper() {
-    if(Robot.m_oi.m_Joystick2.getRawButton(2)) {
-      _gripper.set(true);      
+    if(Robot.m_oi.m_Joystick2.getRawButton(1) == true) {
+      _gripper.set(true);
     } else {
       _gripper.set(false);    }
   }
