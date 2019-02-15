@@ -1,3 +1,4 @@
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -18,12 +19,12 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class Chassis extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public final static WPI_TalonSRX _talon0 = RobotMap._talon0;
-  public final static WPI_TalonSRX _talon1 = RobotMap._talon1;
-  public final static WPI_TalonSRX _talon2 = RobotMap._talon2;
-  public final static WPI_TalonSRX _talon3 = RobotMap._talon3;
+  public final static WPI_TalonSRX _motorFrontLeft = RobotMap._motorFrontLeft;
+  public final static WPI_TalonSRX _motorBackLeft = RobotMap._motorBackLeft;
+  public final static WPI_TalonSRX _motorFrontRight = RobotMap._motorFrontRight;
+  public final static WPI_TalonSRX _motorBackRight = RobotMap._motorBackRight;
 
-  public DifferentialDrive m_DifferentialDrive = new DifferentialDrive(RobotMap._talon0, RobotMap._talon2);
+  public DifferentialDrive m_DifferentialDrive = new DifferentialDrive(RobotMap._motorFrontLeft, RobotMap._motorFrontRight);
 
   @Override
   public void initDefaultCommand() {
@@ -31,9 +32,13 @@ public class Chassis extends Subsystem {
      setDefaultCommand(new teleopDrive());
   }
 
+   public void driveSetUp() {
+    _motorBackLeft.follow(_motorFrontLeft);
+    _motorBackRight.follow(_motorFrontRight);
+   }
+
    public void drive() {
-    m_DifferentialDrive.tankDrive(Robot.m_oi.m_Controller1.getRawAxis(1), Robot.m_oi.m_Controller1.getY()); 
-    _talon1.follow(_talon0);
-    _talon3.follow(_talon2);
+    m_DifferentialDrive.tankDrive(Robot.m_oi.m_Controller1.getRawAxis(5), Robot.m_oi.m_Controller1.getRawAxis(1)); 
+    
    }
 }

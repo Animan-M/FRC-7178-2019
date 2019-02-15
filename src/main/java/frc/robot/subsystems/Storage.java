@@ -19,7 +19,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;;
 public class Storage extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public final static WPI_TalonSRX _talon7 = RobotMap._talon7;
+  //public final static WPI_TalonSRX _talon7 = RobotMap._talon7;
   
   @Override
   public void initDefaultCommand() {
@@ -28,10 +28,10 @@ public class Storage extends Subsystem {
   }
 
   public void Holder() {
-    if(Robot.m_oi.m_Joystick2.getRawButton(3) == true) {
-      _talon7.set(0.5);
-    } else {
-      _talon7.set(0);
-    }
+    // if(Robot.m_oi.m_Joystick2.getRawButton(3) == true) {
+    //   _talon7.set(0.5);
+    // } else {
+    // s  _talon7.set(0);
+    // }
   }
 }

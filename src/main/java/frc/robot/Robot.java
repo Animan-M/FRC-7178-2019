@@ -24,15 +24,15 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
-  public static Actuator m_Actuator = new Actuator();
-  public static BackIntake m_BackIntake = new BackIntake();
-  public static Chassis m_chassis = new Chassis();
-  public static Elevator m_Elevator = new Elevator();
-  public static HatchGripper m_HatchGripper = new HatchGripper();
-  public static LaunchWheels m_LaunchWheels = new LaunchWheels();
-  public static Storage m_Storage = new Storage();
-  public static CargoIntake m_CargoIntake = new CargoIntake();
-  Compressor _airCompressor = new Compressor(14);  
+  public static Actuator m_Actuator;
+  // public static BackIntake m_BackIntake = new BackIntake();
+  public static Chassis m_chassis;
+  public static Elevator m_Elevator;
+  public static HatchGripper m_HatchGripper;
+  public static LaunchWheels m_LaunchWheels;
+  public static Storage m_Storage;
+  public static CargoIntake m_CargoIntake;
+  // Compressor _airCompressor = new Compressor(14);  
    Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -45,16 +45,16 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     // chooser.addOption("My Auto", new MyAutoCommand());
-    m_Actuator = new Actuator();
-    m_BackIntake = new BackIntake();
+    // m_Actuator = new Actuator();
+    // m_BackIntake = new BackIntake();
     m_chassis = new Chassis();
     m_Elevator = new Elevator();
-    m_HatchGripper = new HatchGripper();
+   // m_HatchGripper = new HatchGripper();
     m_LaunchWheels = new LaunchWheels();
     m_Storage = new Storage();
-    m_CargoIntake = new CargoIntake();
+   // m_CargoIntake = new CargoIntake();
     SmartDashboard.putData("Auto mode", m_chooser);
-    _airCompressor = new Compressor(14);
+    //_airCompressor = new Compressor(8);
     }
 
   /**

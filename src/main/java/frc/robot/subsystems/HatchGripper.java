@@ -17,8 +17,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class HatchGripper extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public final static Solenoid _gripper1 = RobotMap._gripper1;
-  public final static Solenoid _gripper2 = RobotMap._gripper2;
+  public final static Solenoid _gripper = RobotMap._gripper;
 
   @Override
   public void initDefaultCommand() {
@@ -27,17 +26,13 @@ public class HatchGripper extends Subsystem {
   }
 
   public void GripperSetUp() {
-    _gripper1.set(false);
-    _gripper2.set(false);
+    _gripper.set(false);
   }
 
   public void Gripper() {
     if(Robot.m_oi.m_Joystick2.getRawButton(2)) {
-      _gripper1.set(true);
-      _gripper2.set(true);
+      _gripper.set(true);      
     } else {
-      _gripper1.set(false);
-      _gripper2.set(false);
-    }
+      _gripper.set(false);    }
   }
 }

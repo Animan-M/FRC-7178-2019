@@ -11,28 +11,32 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorMove;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 /**
  * Add your docs here.
 */
 public class Elevator extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public final static WPI_TalonSRX _talon4 = RobotMap._talon4;
-  
+  public final static WPI_VictorSPX _elevatorLeft = RobotMap._elevatorLeft;
+  public static final WPI_VictorSPX _elevatorRight = RobotMap._elevatorRight;
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new ElevatorMove());
   }
 
+  public void ElevatorStartUp() {
+    _elevatorRight.follow(_elevatorLeft);
+  }
+  
   public void ElevatorShift() {
     if(Robot.m_oi.m_Joystick2.getY() > 0) {
-      _talon4.set(Robot.m_oi.m_Joystick2.getY());
+      _elevatorLeft.set(Robot.m_oi.m_Joystick2.getY());
     } else if (Robot.m_oi.m_Joystick2.getY() < 0) {
-      _talon4.set(-Robot.m_oi.m_Joystick2.getY());
+      _elevatorLeft.set(-Robot.m_oi.m_Joystick2.getY());
     } else {
-      _talon4.set(0);
+      _elevatorLeft.set(0);
     }
   }
 

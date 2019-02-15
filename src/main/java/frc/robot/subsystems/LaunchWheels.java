@@ -19,8 +19,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class LaunchWheels extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public final static WPI_TalonSRX _talon8 = RobotMap._talon8;
-  public final static WPI_TalonSRX _talon9 = RobotMap._talon9;
+  public final static WPI_TalonSRX _shootFront = RobotMap._shootFront;
+  public final static WPI_TalonSRX _shootBack = RobotMap._shootBack;
   
   @Override
   public void initDefaultCommand() {
@@ -29,14 +29,14 @@ public class LaunchWheels extends Subsystem {
   }
 
   public void LaunchSetUp() {
-    _talon9.follow(_talon8);
+    _shootBack.follow(_shootFront);
   }
 
   public void Launch() {
-    if(Robot.m_oi.m_Joystick2.getRawButton(4)) {
-      _talon8.set(1);
+    if(Robot.m_oi.m_Controller1.getRawButton(1)) {
+      _shootFront.set(0.5);
     } else {
-      _talon8.set(0);
+      _shootBack.set(0);
     }
   }
 }

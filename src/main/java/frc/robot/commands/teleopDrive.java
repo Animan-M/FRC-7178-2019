@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class teleopDrive extends Command {
+  int looptest = 0;
   public teleopDrive() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -20,13 +21,18 @@ public class teleopDrive extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
+    Robot.m_chassis.driveSetUp();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(looptest++ > 50){
+      System.out.println("Axis 1 "+Robot.m_oi.m_Controller1.getRawAxis(1)+" Axis 5 "+Robot.m_oi.m_Controller1.getRawAxis(5));
+      looptest = 0;
+    }
     Robot.m_chassis.drive();
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

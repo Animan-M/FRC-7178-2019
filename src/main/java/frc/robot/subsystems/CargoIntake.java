@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class CargoIntake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public static Solenoid _cargo1 = RobotMap._cargo1;
-  public static Solenoid _cargo2 = RobotMap._cargo2;
+  public static Solenoid _lowerIntakeLeft = RobotMap._lowerIntakeLeft;
+  public static Solenoid _lowerIntakeRight = RobotMap._lowerIntakeRight;
 
   @Override
   public void initDefaultCommand() {
@@ -28,17 +28,17 @@ public class CargoIntake extends Subsystem {
   }
 
   public void CargoIntakeSetUp() {
-    _cargo1.set(false);
-    _cargo2.set(false);
+    _lowerIntakeLeft.set(false);
+    _lowerIntakeRight.set(false);
   }
 
   public void Intake() {
     if(Robot.m_oi.m_Controller1.getRawButton(5) == true) {
-      _cargo1.set(true);
-      _cargo2.set(true);
+      _lowerIntakeLeft.set(true);
+      _lowerIntakeRight.set(true);
     } else {
-      _cargo1.set(false);
-      _cargo2.set(false);
+      _lowerIntakeLeft.set(false);
+      _lowerIntakeRight.set(false);
     }
   }
 }
