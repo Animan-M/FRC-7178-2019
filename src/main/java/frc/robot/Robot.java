@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   public static LaunchWheels m_LaunchWheels;
   public static Storage m_Storage;
   public static CargoIntake m_CargoIntake;
-  // Compressor _airCompressor = new Compressor(8);  
+  Compressor _airCompressor = new Compressor(8);  
    Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
     m_Storage = new Storage();
     m_CargoIntake = new CargoIntake();
     SmartDashboard.putData("Auto mode", m_chooser);
-    //_airCompressor = new Compressor(8);
+    _airCompressor = new Compressor(8);
     }
 
   /**
