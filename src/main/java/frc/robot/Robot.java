@@ -33,11 +33,10 @@ public class Robot extends TimedRobot {
   public static Storage m_Storage;
   public static CargoIntake m_CargoIntake;
   Compressor _airCompressor = new Compressor(8);  
-   Command m_autonomousCommand;
+  Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
-   * 
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
