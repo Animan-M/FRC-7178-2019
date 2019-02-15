@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
   public static LaunchWheels m_LaunchWheels;
   public static Storage m_Storage;
   public static CargoIntake m_CargoIntake;
-  // Compressor _airCompressor = new Compressor(14);  
+  // Compressor _airCompressor = new Compressor(8);  
    Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
