@@ -13,13 +13,13 @@ import frc.robot.Robot;
 public class IntakeBack extends Command {
   public IntakeBack() {
     // Use requires() here to declare subsystem dependencies
-    //requires(Robot.m_BackIntake);
+    requires(Robot.m_BackIntake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-  //Robot.m_BackIntake.IntakeSetUp();
+  Robot.m_BackIntake.IntakeSetUp();
   }
 
   // Called repeatedly when this Command is scheduled to run

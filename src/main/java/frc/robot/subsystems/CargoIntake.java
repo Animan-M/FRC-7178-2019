@@ -33,7 +33,7 @@ public class CargoIntake extends Subsystem {
   }
 
   public void Intake() {
-    if(Robot.m_oi.m_Controller1.getRawButton(5) == true) {
+    if(Robot.m_oi.m_Controller1.getRawButton(6) == true) {
       _lowerIntakeLeft.set(true);
       _lowerIntakeRight.set(true);
     } else {

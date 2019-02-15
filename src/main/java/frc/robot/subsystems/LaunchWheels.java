@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.LaunchBall;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 /**
  * Add your docs here.
  */
@@ -33,8 +33,10 @@ public class LaunchWheels extends Subsystem {
   }
 
   public void Launch() {
-    if(Robot.m_oi.m_Controller1.getRawButton(1)) {
+    if(Robot.m_oi.m_Controller1.getRawAxis(3) < 0) {
       _shootFront.set(0.5);
+    } if (Robot.m_oi.m_Controller1.getRawAxis(3) > 0) {
+      _shootBack.set(-0.5);
     } else {
       _shootBack.set(0);
     }
