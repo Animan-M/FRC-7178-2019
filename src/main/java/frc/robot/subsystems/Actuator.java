@@ -40,7 +40,7 @@ public class Actuator extends Subsystem {
 
   public void Down() {
     if(Robot.m_oi.m_Controller1.getRawButton(8) && Robot.m_oi.m_Joystick2.getRawButton(7) && Robot.m_oi.m_Joystick2.getRawButton(8) == true) {
-      _liftFrontLeft.set(1);
+      _liftFrontLeft.set(0.3);
     } else {
       _liftFrontLeft.set(0);
     }
