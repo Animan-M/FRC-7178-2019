@@ -26,7 +26,7 @@ public class Elevator extends Subsystem {
     setDefaultCommand(new ElevatorMove());
   }
 
-  public void ElevatorStartUp() {
+  public void ElevatorSetUp() {
     _elevatorRight.follow(_elevatorLeft);
   }
   
