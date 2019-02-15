@@ -7,8 +7,11 @@
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.ActuatorDown;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;;
 /**
  * Add your docs here.
@@ -20,17 +23,19 @@ public class Actuator extends Subsystem {
   public final static WPI_TalonSRX _liftBackLeft = RobotMap._liftBackLeft;
   public final static WPI_TalonSRX _liftFrontRight = RobotMap._liftFrontRight;
   public final static WPI_TalonSRX _liftBackRight = RobotMap._liftBackRight;
+  public final static Gyro _gyro = RobotMap._gyro;
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+   setDefaultCommand(new ActuatorDown());
   }
 
   public void ActuatorSetUp() {
     _liftBackLeft.follow(_liftFrontLeft);
     _liftFrontRight.follow(_liftFrontLeft);
     _liftBackRight.follow(_liftFrontLeft);
+    _gyro.reset();
   }
 
   public void Down() {
