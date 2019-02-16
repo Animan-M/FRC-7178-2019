@@ -53,7 +53,7 @@ public class RobotMap {
   //Lower Intake Right
   public static Solenoid _lowerIntakeRight = new Solenoid(8, 3); //_cargo1
   //UpperIntake
-  //public static Solenoid _upperIntake = new Solenoid(8, 4); //_cargo2
+  public static Solenoid _upperIntake = new Solenoid(8, 1); //_cargo2
   // Gyro
   // public static ADXL345_SPI _gyro = new ADXL345_SPI(0);
 

@@ -135,11 +135,28 @@ public class Actuator extends Subsystem {
       // _liftFrontRight.enableCurrentLimit(true);
       // _liftBackRight.enableCurrentLimit(true);
     } else if (Robot.m_oi.m_Controller1.getRawButton(3) == true) {
-      _liftBackLeft.set(-0.25);
-      _liftBackRight.set(-0.22);
+      if(_br_ul.get() == false){
+        _liftBackRight.set(-0.22);
+      }else{
+        _liftBackRight.set(0);
+      }
+      if(_bl_ul.get() == false){
+        _liftBackLeft.set(-0.25);
+      }else{
+        _liftBackLeft.set(0.0);
+      }
+      
     } else if (Robot.m_oi.m_Controller1.getRawButton(4) == true) {
-      _liftFrontLeft.set(-0.25);
-      _liftFrontRight.set(-0.21);
+      if(_fl_ul.get() == false){
+        _liftFrontLeft.set(-0.25);
+      }else{
+        _liftFrontLeft.set(0.0);
+      }
+      if(_fr_ul.get() == false){
+        _liftFrontRight.set(-0.21);
+      }else{
+        _liftFrontRight.set(0);
+      }
      } else { _liftFrontLeft.set(0);
       _liftBackLeft.set(0);
       _liftFrontRight.set(0);
