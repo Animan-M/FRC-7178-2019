@@ -12,6 +12,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ActuatorDown;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;;
 /**
  * Add your docs here.
@@ -32,6 +33,7 @@ public class Actuator extends Subsystem {
   }
 
   public void ActuatorSetUp() {
+    _liftBackLeft.setInverted(true);
     _liftBackLeft.follow(_liftFrontLeft);
     _liftFrontRight.follow(_liftFrontLeft);
     _liftBackRight.follow(_liftFrontLeft);
@@ -40,9 +42,24 @@ public class Actuator extends Subsystem {
 
   public void Down() {
     if(Robot.m_oi.m_Controller1.getRawButton(8) && Robot.m_oi.m_Joystick2.getRawButton(7) && Robot.m_oi.m_Joystick2.getRawButton(8) == true) {
-      _liftFrontLeft.set(0.3);
-    } else {
+      _liftFrontLeft.set(ControlMode.Current, 5);
+      _liftFrontRight.set(ControlMode.Current, 5);
+      _liftBackLeft.set(ControlMode.Current, 5);
+      _liftBackRight.set(ControlMode.Current, 5);
+      _liftFrontLeft.set(.4);
+      _liftBackLeft.set(.4);
+      _liftFrontRight.set(.4);
+      _liftBackRight.set(.4);
+    // } else if {
+    //   _liftFrontLeft.set(ControlMode.Current, 5);
+    //   _liftFrontRight.set(ControlMode.Current, 5);
+    //   _liftBackLeft.set(ControlMode.Current, 5);
+    //   _liftBackRight.set(ControlMode.Current, 5);
+    }else{
       _liftFrontLeft.set(0);
+      _liftBackLeft.set(0);
+      _liftFrontRight.set(0);
+      _liftBackRight.set(0);
     }
   }
 }
