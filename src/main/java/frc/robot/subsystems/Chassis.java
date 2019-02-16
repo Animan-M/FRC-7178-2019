@@ -38,7 +38,7 @@ public class Chassis extends Subsystem {
    }
 
    public void drive() {
-    m_DifferentialDrive.tankDrive(-Robot.m_oi.m_Controller1.getRawAxis(5), -Robot.m_oi.m_Controller1.getRawAxis(1)); 
+    m_DifferentialDrive.tankDrive(-Robot.m_oi.m_Controller1.getRawAxis(1), -Robot.m_oi.m_Controller1.getRawAxis(5)); 
     
    }
 }

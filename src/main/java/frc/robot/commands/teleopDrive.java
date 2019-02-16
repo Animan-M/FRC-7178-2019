@@ -27,10 +27,10 @@ public class teleopDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(looptest++ > 50){
-      System.out.println("Axis 1 "+Robot.m_oi.m_Controller1.getRawAxis(1)+" Axis 5 "+Robot.m_oi.m_Controller1.getRawAxis(5));
-      looptest = 0;
-    }
+    // if(looptest++ > 50){
+    //   System.out.println("Axis 1 "+Robot.m_oi.m_Controller1.getRawAxis(1)+" Axis 5 "+Robot.m_oi.m_Controller1.getRawAxis(5));
+    //   looptest = 0;
+    // }
     Robot.m_chassis.drive();
 
   }
