@@ -13,8 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ActuatorDown;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;;
 /**
@@ -71,7 +69,7 @@ public class Actuator extends Subsystem {
   public void Down() {
 
     //check the buttons measure the current.
-    if((Robot.m_oi.m_Controller1.getRawButton(8) == true)) {
+    if((Robot.m_oi.m_Controller1.getRawButton(3) == true)) {
       if(_fr_ll.get() == false){
         _liftFrontRight.set(0.51);
         _lastCurrentFR = _liftFrontRight.getOutputCurrent();
@@ -96,7 +94,7 @@ public class Actuator extends Subsystem {
       }else{
         _liftFrontLeft.set(0.0);
       }
-    }else if((Robot.m_oi.m_Controller1.getRawButton(7) == true)) {
+    }else if((Robot.m_oi.m_Controller1.getRawButton(8) == true)) {
         _lastCurrentFL = _liftFrontLeft.getOutputCurrent();
         _lastCurrentBL = _liftBackLeft.getOutputCurrent();
         _lastCurrentFR = _liftFrontRight.getOutputCurrent();
@@ -135,7 +133,8 @@ public class Actuator extends Subsystem {
       // _liftBackLeft.enableCurrentLimit(true);
       // _liftFrontRight.enableCurrentLimit(true);
       // _liftBackRight.enableCurrentLimit(true);
-    } else if (Robot.m_oi.m_Controller1.getRawButton(3) == true) {
+    } else if (Robot.m_oi.m_Controller1.getRawButton(1) == true) {
+      // Back comes up
       if(_br_ul.get() == false){
         _liftBackRight.set(-0.22);
       }else{
@@ -145,9 +144,15 @@ public class Actuator extends Subsystem {
         _liftBackLeft.set(-0.25);
       }else{
         _liftBackLeft.set(0.0);
-      }
-      
-    } else if (Robot.m_oi.m_Controller1.getRawButton(4) == true) {
+      } // Front pushes down
+      if(_fr_ll.get() == false){
+        _liftFrontRight.set(0.51);
+        _lastCurrentFR = _liftFrontRight.getOutputCurrent();
+      }else{
+        _liftFrontRight.set(0);
+      }      
+    } else if (Robot.m_oi.m_Controller1.getRawButton(2) == true) {
+      //Front comes up
       if(_fl_ul.get() == false){
         _liftFrontLeft.set(-0.25);
       }else{
@@ -158,7 +163,8 @@ public class Actuator extends Subsystem {
       }else{
         _liftFrontRight.set(0);
       }
-     } else { _liftFrontLeft.set(0);
+     } else { 
+       _liftFrontLeft.set(0);
       _liftBackLeft.set(0);
       _liftFrontRight.set(0);
       _liftBackRight.set(0);

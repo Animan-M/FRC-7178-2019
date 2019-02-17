@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -44,6 +43,6 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   public XboxController m_Controller1 = new XboxController(0);
-  public Joystick m_Joystick2 = new Joystick(1);
+  public XboxController m_Controller2 = new XboxController(1);
 
 }
