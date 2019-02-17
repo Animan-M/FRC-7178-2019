@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorMove;
@@ -25,13 +26,14 @@ import edu.wpi.first.wpilibj.AnalogInput;
   public final static WPI_VictorSPX _elevatorRight = RobotMap._elevatorRight;
 
   public static AnalogInput _ai = new AnalogInput(0);
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new ElevatorMove());
   }
 
-  public void ElevatorSetUp() {
+    public void ElevatorSetUp() {
     _elevatorRight.follow(_elevatorLeft);
     _elevatorLeft.setNeutralMode(NeutralMode.Brake);
     _elevatorRight.setNeutralMode(NeutralMode.Brake);
@@ -50,5 +52,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
       _elevatorRight.set(0);
     }
     
+    SmartDashboard.putNumber("Accumulator Value", _ai.getAccumulatorValue());
+  
   }
 }
