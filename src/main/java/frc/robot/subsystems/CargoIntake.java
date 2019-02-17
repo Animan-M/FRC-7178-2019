@@ -20,6 +20,7 @@ public class CargoIntake extends Subsystem {
   // here. Call these from Commands.
   public static Solenoid _lowerIntakeLeft = RobotMap._lowerIntakeLeft;
   public static Solenoid _lowerIntakeRight = RobotMap._lowerIntakeRight;
+  public static Solenoid _upperIntake = RobotMap._upperIntake;
 
   @Override
   public void initDefaultCommand() {
@@ -30,15 +31,24 @@ public class CargoIntake extends Subsystem {
   public void CargoIntakeSetUp() {
     _lowerIntakeLeft.set(false);
     _lowerIntakeRight.set(false);
+    _upperIntake.set(false);
   }
 
   public void Intake() {
     if(Robot.m_oi.m_Joystick2.getRawButton(3) == true) {
       _lowerIntakeLeft.set(true);
-      _lowerIntakeRight.set(true);
-    } else {
+     // _lowerIntakeRight.set(true);
+    } else if (Robot.m_oi.m_Joystick2.getRawButton(4) == true) {
+     _lowerIntakeRight.set(true);
+    } else if (Robot.m_oi.m_Joystick2.getRawButton(5) == true) {
+    _upperIntake.set(true);
+    _lowerIntakeRight.set(true);
+    } else if (Robot.m_oi.m_Joystick2.getRawButton(5) == false) {
+    _upperIntake.set(false);
+    _lowerIntakeRight.set(false);
+    } else { 
       _lowerIntakeLeft.set(false);
       _lowerIntakeRight.set(false);
-    }
+    } 
   }
 }

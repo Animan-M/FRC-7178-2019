@@ -31,10 +31,10 @@ public class Elevator extends Subsystem {
   }
   
   public void ElevatorShift() {
-    if(Robot.m_oi.m_Joystick2.getY() > 0.1) {
-      _elevatorLeft.set(Robot.m_oi.m_Joystick2.getY());
-    } else if (Robot.m_oi.m_Joystick2.getY() < 0.1) {
-      _elevatorLeft.set(-Robot.m_oi.m_Joystick2.getY());
+    if(Robot.m_oi.m_Joystick2.getRawButton(11)) {
+      _elevatorLeft.set(0.2);
+    } else if (Robot.m_oi.m_Joystick2.getRawButton(12)) {
+      _elevatorLeft.set(-0.2);
     } else {
       _elevatorLeft.set(0);
     }

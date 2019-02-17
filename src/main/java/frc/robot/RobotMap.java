@@ -10,8 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+// import edu.wpi.first.wpilibj.ADXL345_SPI;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -48,15 +47,16 @@ public class RobotMap {
   public static WPI_TalonSRX _liftFrontRight = new WPI_TalonSRX(1); ///_talon12
   public static WPI_TalonSRX _liftBackRight = new WPI_TalonSRX(2); //_talon13
   //Hatch Solenoids
-  public static Solenoid _gripper = new Solenoid(8, 1); //_gripper1
+  public static Solenoid _gripper = new Solenoid(8, 0); //_gripper1
   //Lower Intake Left
   public static Solenoid _lowerIntakeLeft = new Solenoid(8, 2); //_gripper2
   //Lower Intake Right
   public static Solenoid _lowerIntakeRight = new Solenoid(8, 3); //_cargo1
   //UpperIntake
-  public static Solenoid _upperIntake = new Solenoid(8, 4); //_cargo2
+  public static Solenoid _upperIntake = new Solenoid(8, 1); //_cargo2
   // Gyro
-  public static Gyro _gyro = new ADXRS450_Gyro();
+  // public static ADXL345_SPI _gyro = new ADXL345_SPI(0);
+
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
