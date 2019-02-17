@@ -13,6 +13,8 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ElevatorMove;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj.AnalogInput;
 /**
@@ -26,6 +28,18 @@ import edu.wpi.first.wpilibj.AnalogInput;
   public final static WPI_VictorSPX _elevatorRight = RobotMap._elevatorRight;
 
   public static AnalogInput _ai = new AnalogInput(0);
+
+  public static final double _lowHatch = 1;
+  public static final double _midHatch = 2;
+  public static final double _highHatch = 3;
+  
+  public static final double _lowShoot = 1.0 ;
+  public static final double _midShoot = 1.5;
+  public static final double _highShoot = 3.5;
+
+  public static final double _base = 0.5;
+
+  public static final double _threshold = 0.05;
 
   @Override
   public void initDefaultCommand() {
@@ -51,8 +65,66 @@ import edu.wpi.first.wpilibj.AnalogInput;
       _elevatorLeft.set(0);
       _elevatorRight.set(0);
     }
-    
-    SmartDashboard.putNumber("Accumulator Value", _ai.getAccumulatorValue());
+
+    if(Robot.m_oi.m_Controller2.getRawButton(2) == true) {
+      if(_ai.getAverageVoltage() > _lowHatch + _threshold) {
+        _elevatorLeft.set(-0.2);
+        _elevatorRight.set(-0.2);
+      } else if (_ai.getAverageVoltage() < _lowHatch - _threshold) {
+        _elevatorLeft.set(0.2);
+        _elevatorRight.set(0.2);
+      } else {
+        _elevatorLeft.set(0);
+        _elevatorRight.set(0);
+      }
+    }
+
+    if(Robot.m_oi.m_Controller2.getRawButton(4) == true) {
+      if(_ai.getAverageVoltage() > _midHatch + _threshold) {
+        _elevatorLeft.set(-0.2);
+        _elevatorRight.set(-0.2);
+      } else if (_ai.getAverageVoltage() < _midHatch - _threshold) {
+        _elevatorLeft.set(0.2);
+        _elevatorRight.set(0.2);
+      } else {
+        _elevatorLeft.set(0);
+        _elevatorRight.set(0);
+      }
+    }
+
+    if(Robot.m_oi.m_Controller2.getRawButton(2) == true) {
+      if(_ai.getAverageVoltage() > _highHatch + _threshold) {
+        _elevatorLeft.set(-0.2);
+        _elevatorRight.set(-0.2);
+      } else if (_ai.getAverageVoltage() < _highHatch - _threshold) {
+        _elevatorLeft.set(0.2);
+        _elevatorRight.set(0.2);
+      } else {
+        _elevatorLeft.set(0);
+        _elevatorRight.set(0);
+      }
+    }
+
+    if(Robot.m_oi.m_Controller2.getRawButton(7) == true) {
+        if(_ai.getAverageVoltage() > _midShoot + _threshold) {
+          _elevatorLeft.set(-0.2);
+          _elevatorRight.set(-0.2);
+        } else if (_ai.getAverageVoltage() < _midShoot - _threshold) {
+          _elevatorLeft.set(0.2);
+          _elevatorRight.set(0.2);
+        } else {
+          _elevatorLeft.set(0);
+          _elevatorRight.set(0);
+        }
+    }
+
+      
+
+
+
+
+
+    SmartDashboard.putNumber("Accumulator Value", _ai.getAverageVoltage());
   
   }
 }

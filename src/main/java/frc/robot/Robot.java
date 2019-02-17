@@ -19,7 +19,6 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.HatchGripper;
 import frc.robot.subsystems.LaunchWheels;
 import frc.robot.subsystems.CargoIntake;
-import frc.robot.subsystems.Storage;
 
 /**
  * 
@@ -37,7 +36,6 @@ public class Robot extends TimedRobot {
   public static Elevator m_Elevator;
   public static HatchGripper m_HatchGripper;
   public static LaunchWheels m_LaunchWheels;
-  public static Storage m_Storage;
   public static CargoIntake m_CargoIntake;
   Compressor _airCompressor = new Compressor(8);  
   Command m_autonomousCommand;
@@ -57,7 +55,6 @@ public class Robot extends TimedRobot {
     m_Elevator = new Elevator();
     m_HatchGripper = new HatchGripper();
     m_LaunchWheels = new LaunchWheels();
-    m_Storage = new Storage();
     m_CargoIntake = new CargoIntake();
     SmartDashboard.putData("Auto mode", m_chooser);
     _airCompressor = new Compressor(8);

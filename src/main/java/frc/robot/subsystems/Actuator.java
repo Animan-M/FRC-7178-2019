@@ -43,6 +43,16 @@ public class Actuator extends Subsystem {
   public static DigitalInput _fl_ul = new DigitalInput(6);
   public static DigitalInput _fl_ll = new DigitalInput(7);
 
+  public static final double _fl_speed = 0.55;
+  public static final double _fr_speed = 0.51;
+  public static final double _bl_speed = 0.55;
+  public static final double _br_speed = 0.52;
+
+  public static boolean _fr_UP = false;
+  public static boolean _fl_UP = false;
+  public static boolean _bl_UP = false;
+  public static boolean _br_UP = false;
+
   //upperlimits 0,2,4,6
   //lowerlimits 1,3,5,7
   //FR, BR, BL, FL
@@ -71,25 +81,25 @@ public class Actuator extends Subsystem {
     //check the buttons measure the current.
     if((Robot.m_oi.m_Controller1.getRawButton(3) == true)) {
       if(_fr_ll.get() == false){
-        _liftFrontRight.set(0.51);
+        _liftFrontRight.set(_fr_speed);
         _lastCurrentFR = _liftFrontRight.getOutputCurrent();
       }else{
         _liftFrontRight.set(0);
       }
       if(_br_ll.get() == false){
-        _liftBackRight.set(0.52);
+        _liftBackRight.set(_br_speed);
         _lastCurrentBR = _liftBackRight.getOutputCurrent();
       }else{
         _liftBackRight.set(0);
       }
       if(_bl_ll.get() == false){
-        _liftBackLeft.set(0.55);
+        _liftBackLeft.set(_bl_speed);
       }else{
         _liftBackLeft.set(0.0);
         _lastCurrentBL = _liftBackLeft.getOutputCurrent();
       }
       if(_fl_ll.get() == false){
-        _liftFrontLeft.set(0.55);
+        _liftFrontLeft.set(_fl_speed);
         _lastCurrentFL = _liftFrontLeft.getOutputCurrent();
       }else{
         _liftFrontLeft.set(0.0);
@@ -99,25 +109,62 @@ public class Actuator extends Subsystem {
         _lastCurrentBL = _liftBackLeft.getOutputCurrent();
         _lastCurrentFR = _liftFrontRight.getOutputCurrent();
         _lastCurrentBR = _liftBackRight.getOutputCurrent();
+
         if(_fr_ul.get() == false){
-          _liftFrontRight.set(-0.21);
+          _liftFrontRight.set(-_fr_speed);
         }else{
-          _liftFrontRight.set(0);
+          if(_liftFrontRight.getOutputCurrent() > 10 && _fr_UP == false){
+            _fr_UP =true;
+            _liftFrontRight.set(0);
+          }else{
+            if(_fr_UP == false){
+              _liftFrontRight.set(-_fr_speed);
+            }else{
+              _liftFrontRight.set(0);
+            }
+          }
         }
         if(_br_ul.get() == false){
-          _liftBackRight.set(-0.22);
+          _liftBackRight.set(-_br_speed);
         }else{
-          _liftBackRight.set(0);
+          if(_liftBackRight.getOutputCurrent() > 10 && _br_UP == false){
+            _br_UP =true;
+            _liftBackRight.set(0);
+          }else{
+            if(_br_UP == false){
+              _liftBackRight.set(-_br_speed);
+            }else{
+              _liftBackRight.set(0);
+            }
+          }
         }
         if(_bl_ul.get() == false){
-          _liftBackLeft.set(-0.25);
+          _liftBackLeft.set(-_bl_speed);
         }else{
-          _liftBackLeft.set(0.0);
+          if(_liftBackLeft.getOutputCurrent() > 10 && _bl_UP == false){
+            _bl_UP =true;
+            _liftBackLeft.set(0);
+          }else{
+            if(_bl_UP == false){
+              _liftBackLeft.set(-_bl_speed);
+            }else{
+              _liftBackLeft.set(0);
+            }
+          }
         }
         if(_fl_ul.get() == false){
-          _liftFrontLeft.set(-0.25);
+          _liftFrontLeft.set(-_fl_speed);
         }else{
-          _liftFrontLeft.set(0.0);
+          if(_liftFrontLeft.getOutputCurrent() > 10 && _fl_UP == false){
+            _fl_UP =true;
+            _liftFrontLeft.set(0);
+          }else{
+            if(_fl_UP == false){
+              _liftFrontLeft.set(-_fl_speed);
+            }else{
+              _liftFrontLeft.set(0);
+            }
+          }
         }
     
     // } else if ((Robot.m_oi.m_Controller1.getRawButton(8) == false) && (Robot.m_oi.m_Joystick2.getRawButton(7) ==true) && (Robot.m_oi.m_Joystick2.getRawButton(8) == true)){
@@ -136,12 +183,21 @@ public class Actuator extends Subsystem {
     } else if (Robot.m_oi.m_Controller1.getRawButton(1) == true) {
       // Back comes up
       if(_br_ul.get() == false){
-        _liftBackRight.set(-0.22);
+        _liftBackRight.set(-_br_speed);
       }else{
-        _liftBackRight.set(0);
-      }
+        if(_liftBackRight.getOutputCurrent() > 10 && _br_UP == false){
+          _br_UP =true;
+          _liftBackRight.set(0);
+        }else{
+          if(_br_UP == false){
+            _liftBackRight.set(-_br_speed);
+          }else{
+            _liftBackRight.set(0);
+          }
+        }
+    }
       if(_bl_ul.get() == false){
-        _liftBackLeft.set(-0.25);
+        _liftBackLeft.set(-_bl_speed);
       }else{
         _liftBackLeft.set(0.0);
       } // Front pushes down
@@ -154,14 +210,32 @@ public class Actuator extends Subsystem {
     } else if (Robot.m_oi.m_Controller1.getRawButton(2) == true) {
       //Front comes up
       if(_fl_ul.get() == false){
-        _liftFrontLeft.set(-0.25);
+        _liftFrontLeft.set(-_fl_speed);
       }else{
-        _liftFrontLeft.set(0.0);
+        if(_liftFrontLeft.getOutputCurrent() > 10 && _fl_UP == false){
+          _fl_UP =true;
+          _liftFrontLeft.set(0);
+        }else{
+          if(_fr_UP == false){
+            _liftFrontLeft.set(-_fl_speed);
+          }else{
+            _liftFrontLeft.set(0);
+          }
+        }
       }
       if(_fr_ul.get() == false){
-        _liftFrontRight.set(-0.21);
+        _liftFrontRight.set(-_fr_speed);
       }else{
-        _liftFrontRight.set(0);
+        if(_liftFrontLeft.getOutputCurrent() > 10 && _fl_UP == false){
+          _fl_UP =true;
+          _liftFrontLeft.set(0);
+        }else{
+          if(_fl_UP == false){
+            _liftFrontLeft.set(-_fl_speed);
+          }else{
+            _liftFrontLeft.set(0);
+          }
+        }
       }
      } else { 
        _liftFrontLeft.set(0);
@@ -195,6 +269,11 @@ public class Actuator extends Subsystem {
     SmartDashboard.putNumber("BR Current",_liftBackRight.getOutputCurrent());
     SmartDashboard.putNumber("BL Current",_liftBackLeft.getOutputCurrent());
     SmartDashboard.putNumber("FL Current",_liftFrontLeft.getOutputCurrent());
+
+    SmartDashboard.putBoolean("END GAME FL UP", _fl_UP);
+    SmartDashboard.putBoolean("END GAME FR UP", _fr_UP);
+    SmartDashboard.putBoolean("END GAME BL UP", _bl_UP);
+    SmartDashboard.putBoolean("END GAME BR UP", _br_UP);
 
     // SmartDashboard.putNumber("Gyro x", _gyro.)
 
