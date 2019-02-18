@@ -35,7 +35,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
   //Target Height
   public static double _target = 0;
   //Elevator Speed
-  public static final double _elevatorSpeed = 0.6;
+  public static final double _elevatorSpeed = 0.4;
 
   @Override
   public void initDefaultCommand() {
