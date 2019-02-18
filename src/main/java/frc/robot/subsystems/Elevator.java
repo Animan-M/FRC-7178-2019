@@ -28,26 +28,30 @@ import edu.wpi.first.wpilibj.AnalogInput;
   public final static WPI_VictorSPX _elevatorRight = RobotMap._elevatorRight;
 
   public static AnalogInput _ai = new AnalogInput(0);
-
+  //Hatch levels
   public static final double _lowHatch = 1;
   public static final double _midHatch = 2;
   public static final double _highHatch = 3;
-  
+  //Cargo levels
   public static final double _lowShoot = 1.0 ;
   public static final double _midShoot = 1.5;
   public static final double _highShoot = 3.5;
-
+  //Bottom level
   public static final double _base = 0.5;
-
+  //Threshold difference
   public static final double _threshold = 0.05;
-
+  //Button Count
+  public static double _hatchCount = 0;
+  public static double _cargoCount = 0;
+  //Elevator Speed
+  public static final double _elevatorSpeed = 0.2;
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new ElevatorMove());
   }
 
-    public void ElevatorSetUp() {
+  public void ElevatorSetUp() {
     _elevatorRight.follow(_elevatorLeft);
     _elevatorLeft.setNeutralMode(NeutralMode.Brake);
     _elevatorRight.setNeutralMode(NeutralMode.Brake);
@@ -55,76 +59,105 @@ import edu.wpi.first.wpilibj.AnalogInput;
   }
   
   public void ElevatorShift() {
-    if(Robot.m_oi.m_Controller2.getRawAxis(2) > 0.1) {
-      _elevatorLeft.set(0.2);
-      _elevatorRight.set(0.2);
-    } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) {
-      _elevatorLeft.set(-0.2);
-      _elevatorRight.set(-0.2);
-    } else {
-      _elevatorLeft.set(0);
-      _elevatorRight.set(0);
+    // if(Robot.m_oi.m_Controller2.getRawAxis(2) > 0.1) {
+    //   _elevatorLeft.set(_elevatorSpeed);
+    //   _elevatorRight.set(_elevatorSpeed);
+    // } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) {
+    //   _elevatorLeft.set(-_elevatorSpeed);
+    //   _elevatorRight.set(-_elevatorSpeed);
+    // } else {
+    //   _elevatorLeft.set(0);
+    //   _elevatorRight.set(0);
+    // }
+
+    if(Robot.m_oi.m_Controller2.getRawButton(1) == true) {
+      if(_ai.getAverageVoltage() > _lowHatch + _threshold && _hatchCount == 0) {
+        _elevatorLeft.set(-_elevatorSpeed);
+        _elevatorRight.set(-_elevatorSpeed);
+        _hatchCount = _hatchCount + 1;
+      } else if (_ai.getAverageVoltage() > _midHatch + _threshold && _hatchCount == 1) {
+        _elevatorLeft.set(-_elevatorSpeed);
+        _elevatorRight.set(-_elevatorSpeed);
+        _hatchCount = _hatchCount + 1;
+      } else if(_ai.getAverageVoltage() > _highHatch + _threshold && _hatchCount == 2) {
+        _elevatorLeft.set(-_elevatorSpeed);
+        _elevatorRight.set(-_elevatorSpeed);
+        _hatchCount = _hatchCount + 1;
+      } else {
+        _elevatorLeft.set(0);
+        _elevatorRight.set(0);
+      }
+    }
+
+    if(Robot.m_oi.m_Controller2.getRawButton(3) == true) {
+      if(_ai.getAverageVoltage() < _lowHatch - _threshold && _hatchCount == 1) {
+        _elevatorLeft.set(_elevatorSpeed);
+        _elevatorRight.set(_elevatorSpeed);
+        _hatchCount = _hatchCount - 1;
+      } else if(_ai.getAverageVoltage() < _midHatch - _threshold && _hatchCount == 2) {
+        _elevatorLeft.set(_elevatorSpeed);
+        _elevatorRight.set(_elevatorSpeed);
+        _hatchCount = _hatchCount - 1;
+      } else if(_ai.getAverageVoltage() < _highHatch - _threshold && _hatchCount == 3) {
+        _elevatorLeft.set(-_elevatorSpeed);
+        _elevatorRight.set(-_elevatorSpeed);
+        _hatchCount = _hatchCount - 1;
+      } else {
+        _elevatorLeft.set(0);
+        _elevatorRight.set(0);
+      }
     }
 
     if(Robot.m_oi.m_Controller2.getRawButton(2) == true) {
-      if(_ai.getAverageVoltage() > _lowHatch + _threshold) {
-        _elevatorLeft.set(-0.2);
-        _elevatorRight.set(-0.2);
-      } else if (_ai.getAverageVoltage() < _lowHatch - _threshold) {
-        _elevatorLeft.set(0.2);
-        _elevatorRight.set(0.2);
-      } else {
-        _elevatorLeft.set(0);
-        _elevatorRight.set(0);
-      }
-    }
-
-    if(Robot.m_oi.m_Controller2.getRawButton(4) == true) {
-      if(_ai.getAverageVoltage() > _midHatch + _threshold) {
-        _elevatorLeft.set(-0.2);
-        _elevatorRight.set(-0.2);
-      } else if (_ai.getAverageVoltage() < _midHatch - _threshold) {
-        _elevatorLeft.set(0.2);
-        _elevatorRight.set(0.2);
-      } else {
-        _elevatorLeft.set(0);
-        _elevatorRight.set(0);
-      }
-    }
-
-    if(Robot.m_oi.m_Controller2.getRawButton(2) == true) {
-      if(_ai.getAverageVoltage() > _highHatch + _threshold) {
-        _elevatorLeft.set(-0.2);
-        _elevatorRight.set(-0.2);
-      } else if (_ai.getAverageVoltage() < _highHatch - _threshold) {
-        _elevatorLeft.set(0.2);
-        _elevatorRight.set(0.2);
-      } else {
-        _elevatorLeft.set(0);
-        _elevatorRight.set(0);
-      }
-    }
-
-    if(Robot.m_oi.m_Controller2.getRawButton(7) == true) {
-        if(_ai.getAverageVoltage() > _midShoot + _threshold) {
-          _elevatorLeft.set(-0.2);
-          _elevatorRight.set(-0.2);
-        } else if (_ai.getAverageVoltage() < _midShoot - _threshold) {
-          _elevatorLeft.set(0.2);
-          _elevatorRight.set(0.2);
+        if(_ai.getAverageVoltage() > _lowShoot + _threshold && _cargoCount == 0) {
+          _elevatorLeft.set(-_elevatorSpeed);
+          _elevatorRight.set(-_elevatorSpeed);
+          _cargoCount = _cargoCount + 1;
+        } else if(_ai.getAverageVoltage() > _midShoot + _threshold && _cargoCount == 1) {
+          _elevatorLeft.set(_elevatorSpeed);
+          _elevatorRight.set(_elevatorSpeed);
+          _cargoCount = _cargoCount + 1;
+        } else if(_ai.getAverageVoltage() > _highShoot + _threshold && _cargoCount == 2) {
+          _elevatorLeft.set(_elevatorSpeed);
+          _elevatorRight.set(_elevatorSpeed);
+          _cargoCount = _cargoCount + 1;
         } else {
           _elevatorLeft.set(0);
           _elevatorRight.set(0);
         }
     }
 
-      
+    if(Robot.m_oi.m_Controller2.getRawButton(4) == true) {
+      if(_ai.getAverageVoltage() < _lowShoot - _threshold && _cargoCount == 1) {
+        _elevatorLeft.set(_elevatorSpeed);
+        _elevatorRight.set(_elevatorSpeed);
+        _cargoCount = _cargoCount - 1;
+      } else if(_ai.getAverageVoltage() < _midShoot - _threshold && _cargoCount == 2) {
+        _elevatorLeft.set(_elevatorSpeed);
+        _elevatorRight.set(_elevatorSpeed);
+        _cargoCount = _cargoCount - 1;
+      } else if(_ai.getAverageVoltage() < _highShoot - _threshold && _cargoCount == 3) {
+        _elevatorLeft.set(_elevatorSpeed);
+        _elevatorRight.set(_elevatorSpeed);
+        _cargoCount = _cargoCount - 1;
+      } else {
+        _elevatorLeft.set(0);
+        _elevatorRight.set(0);
+      }
 
-
-
-
-
-    SmartDashboard.putNumber("Accumulator Value", _ai.getAverageVoltage());
-  
+    if(Robot.m_oi.m_Controller2.getRawButton(10) == true) {
+      if(_ai.getAverageValue() > _base + _threshold) {
+        _elevatorLeft.set(-_elevatorSpeed);
+        _elevatorRight.set(-_elevatorSpeed);
+      } else if(_ai.getAverageVoltage() < _base - _threshold) {
+        _elevatorLeft.set(_elevatorSpeed);
+        _elevatorRight.set(_elevatorSpeed);
+      } else {
+        _elevatorLeft.set(0);
+        _elevatorRight.set(0);
+      }
+    }
+  }
+  SmartDashboard.putNumber("Accumulator Value", _ai.getAverageVoltage());
   }
 }
