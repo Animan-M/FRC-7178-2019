@@ -33,11 +33,7 @@ public class RobotMap {
   public static WPI_VictorSPX _elevatorRight = new WPI_VictorSPX(14); // new
   //Back Cargo Intake
   public static WPI_TalonSRX _intakeFront = new WPI_TalonSRX(12); //_talon5
-  public static WPI_TalonSRX _intakeBack = new WPI_TalonSRX(13); //_talon6
-  
-  //Storage
-  //public static WPI_TalonSRX _talon7 = new WPI_TalonSRX(7);
-  
+  public static WPI_TalonSRX _intakeBack = new WPI_TalonSRX(13); //_talon6  
   //Launch Wheels
   public static WPI_TalonSRX _shootFront = new WPI_TalonSRX(10); //_talon8
   public static WPI_TalonSRX _shootBack = new WPI_TalonSRX(11); //_talon9
