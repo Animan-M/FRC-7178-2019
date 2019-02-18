@@ -23,7 +23,6 @@ public class Chassis extends Subsystem {
   public final static WPI_TalonSRX _motorBackLeft = RobotMap._motorBackLeft;
   public final static WPI_TalonSRX _motorFrontRight = RobotMap._motorFrontRight;
   public final static WPI_TalonSRX _motorBackRight = RobotMap._motorBackRight;
-
   public DifferentialDrive m_DifferentialDrive = new DifferentialDrive(RobotMap._motorFrontLeft, RobotMap._motorFrontRight);
 
   @Override

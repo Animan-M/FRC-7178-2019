@@ -35,7 +35,6 @@ public class LaunchWheels extends Subsystem {
 
   public void Launch() {
     if(Robot.m_oi.m_Controller1.getRawAxis(2) > 0.1) {
-      _shootFront.set(1);
       _shootBack.set(1);
       _intakeFront.set(-0.75);
     // } if (Robot.m_oi.m_Controller1.getRawButton(2) == true) {
@@ -43,7 +42,6 @@ public class LaunchWheels extends Subsystem {
     //   _shootFront.set(-1);
     } else {
       _shootBack.set(0);
-      _shootFront.set(0);
       _intakeFront.set(0);
     }
   }
