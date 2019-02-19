@@ -35,14 +35,15 @@ public class CargoIntake extends Subsystem {
   }
 
   public void Intake() {
-    if(Robot.m_oi.m_Controller2.getPOV() == 0) { //Package Position?
+    if(Robot.m_oi.m_Controller2.getPOV() == 0) { 
+      
       _lowerIntakeLeft.set(true);
-    } else if (Robot.m_oi.m_Controller2.getPOV() == 270) { //Match Position?
+    } else if (Robot.m_oi.m_Controller2.getPOV() == 270) { 
      _lowerIntakeRight.set(true);
-    } else if (Robot.m_oi.m_Controller2.getPOV() == 180) { //EndGame
+    } else if (Robot.m_oi.m_Controller2.getPOV() == 180) { 
     _upperIntake.set(true);
     _lowerIntakeRight.set(true);
-    } else if (Robot.m_oi.m_Controller2.getPOV() == 90) {
+    } else if (Robot.m_oi.m_Controller2.getPOV() == 180) { //End Gamw
     _upperIntake.set(false);
     _lowerIntakeRight.set(false);
     } else { 

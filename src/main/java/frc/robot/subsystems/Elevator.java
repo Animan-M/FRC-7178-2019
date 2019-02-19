@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
   public static final double _midShoot = 3.39;
   public static final double _highShoot = 4.09;
   //Bottom level
-  public static final double _base = 0.5;
+  public static final double _base = 0.2;
   //Threshold difference
   public static final double _threshold = 0.05;
   //Target Height
@@ -109,7 +109,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
       }  
     } else {
       if (Robot.m_oi.m_Controller2.getRawAxis(2) > 0.1) { //Overide Down
-        if(_ai.getAverageVoltage() > 0.3){
+        if(_ai.getAverageVoltage() > _base){
           _elevatorLeft.set(-_elevatorSpeed);  
         } else {
           _elevatorLeft.set(0);  

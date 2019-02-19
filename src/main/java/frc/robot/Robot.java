@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Compressor;
 import frc.robot.subsystems.Actuator;
 import frc.robot.subsystems.BackIntake;
@@ -56,7 +55,6 @@ public class Robot extends TimedRobot {
     m_HatchGripper = new HatchGripper();
     m_LaunchWheels = new LaunchWheels();
     m_CargoIntake = new CargoIntake();
-    SmartDashboard.putData("Auto mode", m_chooser);
     _airCompressor = new Compressor(8);
     }
 
