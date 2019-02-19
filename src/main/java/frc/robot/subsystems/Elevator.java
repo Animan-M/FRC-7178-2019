@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
   //Cargo levels
   public static final double _lowShoot = 0.8;
   public static final double _midShoot = 2.52;
-  public static final double _highShoot = 3.9;
+  public static final double _highShoot = 4.3;
   //Bottom level
   public static final double _base = 0.15;
   //Threshold difference
@@ -85,11 +85,12 @@ import edu.wpi.first.wpilibj.AnalogInput;
       } else if (_ai.getAverageVoltage() > _lowShoot + _threshold) {
         _target = _lowShoot;
       }
-    } else if (Robot.m_oi.m_Controller2.getRawButton(10) == true) { //Overide Down
-      _target = 0;
-    } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) { //Overide Up
-      _target = 0;
     } 
+    // else if (Robot.m_oi.m_Controller2.getRawButton(10) == true) { //Overide Down
+    //   _target = 0;
+    // } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) { //Overide Up
+    //   _target = 0;
+    // } 
 
     if(_target != 0.0 ){
       if(_target < _base){
@@ -100,30 +101,31 @@ import edu.wpi.first.wpilibj.AnalogInput;
         _target = _highShoot;
       }
 
-      if(_ai.getAverageVoltage() < _target - _threshold) {
+      if(_ai.getAverageVoltage() < _target - _threshold && _ai.getAverageVoltage() < _highShoot + _threshold) {
         _elevatorLeft.set(_elevatorSpeed);
-      } else if (_ai.getAverageVoltage() > _target + _threshold) {
+      } else if (_ai.getAverageVoltage() > _target + _threshold ) {
         _elevatorLeft.set(-_elevatorSpeed);
       } else {
         _elevatorLeft.set(0);
       }  
-    } else {
-      if (Robot.m_oi.m_Controller1.getRawAxis(2) > 0.1) { //Overide Down
-        if(_ai.getAverageVoltage() > _base){
-          _elevatorLeft.set(-_elevatorSpeed);  
-        } else {
-          _elevatorLeft.set(0);  
-        }
-      } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) { //Overide Up
-        if(_ai.getAverageVoltage() < _highShoot){
-          _elevatorLeft.set(_elevatorSpeed);  
-        } else {
-          _elevatorLeft.set(0);
-        }
-      } else {
-        _elevatorLeft.set(0);
-      }
-    }
+    } 
+    // else {
+    //   if (Robot.m_oi.m_Controller1.getRawAxis(2) > 0.1) { //Overide Down
+    //     if(_ai.getAverageVoltage() > _base){
+    //       _elevatorLeft.set(-_elevatorSpeed);  
+    //     } else {
+    //       _elevatorLeft.set(0);  
+    //     }
+    //   } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) { //Overide Up
+    //     if(_ai.getAverageVoltage() < _highShoot){
+    //       _elevatorLeft.set(_elevatorSpeed);  
+    //     } else {
+    //       _elevatorLeft.set(0);
+    //     }
+    //   } else {
+    //     _elevatorLeft.set(0);
+    //   }
+    // }
 
 
     // if(Robot.m_oi.m_Controller2.getRawAxis(2) > 0.1) {

@@ -7,9 +7,11 @@
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.Gripper;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 /**
  * Add your docs here.
@@ -19,6 +21,9 @@ public class HatchGripper extends Subsystem {
   // here. Call these from Commands.
   public final static Solenoid _gripper = RobotMap._gripper;
 
+  public static DigitalInput _topHatch = new DigitalInput(8);
+  public static DigitalInput _bottomHatch = new DigitalInput(9);
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -26,13 +31,23 @@ public class HatchGripper extends Subsystem {
   }
 
   public void GripperSetUp() {
-    _gripper.set(false);
+    _gripper.set(true);
   }
 
   public void Gripper() {
-    if(Robot.m_oi.m_Controller2.getRawButton(6) == true) {
+    // if(Robot.m_oi.m_Controller2.getRawButton(6) == true) {
+    //   _gripper.set(true);
+    // } else {
+    //   _gripper.set(false);
+    // }
+
+    if ((_topHatch.get() == true && _bottomHatch.get() == true) || Robot.m_oi.m_Controller2.getRawButton(6) == true) {
+      _gripper.set(false);
+    } else if (Robot.m_oi.m_Controller2.getRawButton(7) == true) {
       _gripper.set(true);
-    } else {
-      _gripper.set(false);    }
+    }
+
+    SmartDashboard.putBoolean("Top Hatch Grabber", _topHatch.get());
+    SmartDashboard.putBoolean("Bottom Hatch Grabber", _bottomHatch.get());
   }
 }

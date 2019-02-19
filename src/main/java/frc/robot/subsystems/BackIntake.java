@@ -32,12 +32,14 @@ public class BackIntake extends Subsystem {
   }
 
   public void Intake() {
-    if(Robot.m_oi.m_Controller2.getRawAxis(3) > 0.1) {
+    if(Robot.m_oi.m_Controller2.getRawAxis(3) > 0.3) {
       _intakeBack.set(-0.75);
+      _intakeFront.set(0.75);
     // } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) {
     //   _intakeBack.set(0.75);
     } else {
       _intakeBack.set(0);
+      _intakeFront.set(0);
     }
   }
 }
