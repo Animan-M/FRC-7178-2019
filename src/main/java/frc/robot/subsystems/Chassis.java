@@ -34,6 +34,7 @@ public class Chassis extends Subsystem {
   public void driveSetUp() {
     _motorBackLeft.follow(_motorFrontLeft);
     _motorBackRight.follow(_motorFrontRight);
+    m_driveType.setSafetyEnabled(false);
   }
 
   public void drive() {

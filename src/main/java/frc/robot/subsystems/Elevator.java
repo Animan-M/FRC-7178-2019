@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
   public final static WPI_VictorSPX _elevatorRight = RobotMap._elevatorRight;
   public static AnalogInput _ai = new AnalogInput(0);
   //Hatch levels
-  public static final double _lowHatch = 1.2;
+  public static final double _lowHatch = 0.2;
   public static final double _midHatch = 2.5;
   public static final double _highHatch = 3.8;
   //Cargo levels
