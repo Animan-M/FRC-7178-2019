@@ -21,8 +21,8 @@ public class HatchGripper extends Subsystem {
   // here. Call these from Commands.
   public final static Solenoid _gripper = RobotMap._gripper;
 
-  public static DigitalInput _topHatch = new DigitalInput(8);
-  public static DigitalInput _bottomHatch = new DigitalInput(9);
+  public static DigitalInput _bottomHatch = new DigitalInput(8);
+  public static DigitalInput _topHatch = new DigitalInput(9);
 
   @Override
   public void initDefaultCommand() {
@@ -41,13 +41,13 @@ public class HatchGripper extends Subsystem {
     //   _gripper.set(false);
     // }
 
-    if ((_topHatch.get() == true && _bottomHatch.get() == true) || Robot.m_oi.m_Controller2.getRawButton(6) == true) {
+    if ((_topHatch.get() == false && _bottomHatch.get() == false && Robot.m_oi.m_Controller2.getRawButton(6) == false) || Robot.m_oi.m_Controller2.getRawButton(7) == true) {
       _gripper.set(false);
-    } else if (Robot.m_oi.m_Controller2.getRawButton(7) == true) {
+    } else if (Robot.m_oi.m_Controller2.getRawButton(6) == true) {
       _gripper.set(true);
     }
 
-    SmartDashboard.putBoolean("Top Hatch Grabber", _topHatch.get());
     SmartDashboard.putBoolean("Bottom Hatch Grabber", _bottomHatch.get());
+    SmartDashboard.putBoolean("Top Hatch Grabber", _topHatch.get());
   }
 }

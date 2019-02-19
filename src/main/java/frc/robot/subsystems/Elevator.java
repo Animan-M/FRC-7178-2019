@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
  public class Elevator extends Subsystem {
   public final static WPI_VictorSPX _elevatorLeft = RobotMap._elevatorLeft;
   public final static WPI_VictorSPX _elevatorRight = RobotMap._elevatorRight;
-  public static AnalogInput _ai = new AnalogInput(0);
+  public static AnalogInput _ai = new AnalogInput(3);
   //Hatch levels
   public static final double _lowHatch = 0.15;
   public static final double _midHatch = 1.94;
