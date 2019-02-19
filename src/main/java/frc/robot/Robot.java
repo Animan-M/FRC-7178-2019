@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import frc.robot.subsystems.Actuator;
 import frc.robot.subsystems.BackIntake;
@@ -56,6 +57,8 @@ public class Robot extends TimedRobot {
     m_LaunchWheels = new LaunchWheels();
     m_CargoIntake = new CargoIntake();
     _airCompressor = new Compressor(8);
+    CameraServer.getInstance().startAutomaticCapture(0);
+    CameraServer.getInstance().startAutomaticCapture(1);
     }
 
   /**
