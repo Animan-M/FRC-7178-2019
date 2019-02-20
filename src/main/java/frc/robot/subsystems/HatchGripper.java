@@ -34,7 +34,7 @@ public class HatchGripper extends Subsystem {
     _gripper.set(true);
   }
 
-  public void Gripper() {
+  public void GripperThing() {
     // if(Robot.m_oi.m_Controller2.getRawButton(6) == true) {
     //   _gripper.set(true);
     // } else {

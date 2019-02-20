@@ -21,21 +21,23 @@ import edu.wpi.first.wpilibj.AnalogInput;
   public final static WPI_VictorSPX _elevatorRight = RobotMap._elevatorRight;
   public static AnalogInput _ai = new AnalogInput(3);
   //Hatch levels
-  public static final double _lowHatch = 0.15;
-  public static final double _midHatch = 1.94;
-  public static final double _highHatch = 3.81;
+  public static final double _lowHatch = 0.17;
+  public static final double _midHatch = 2.05;
+  public static final double _highHatch = 3.80;
   //Cargo levels
   public static final double _lowShoot = 0.8;
-  public static final double _midShoot = 2.52;
-  public static final double _highShoot = 4.3;
+  public static final double _midShoot = 2.5;
+  public static final double _highShoot = 4.26;
   //Bottom level
-  public static final double _base = 0.15;
+  public static final double _base = 0.17;
   //Threshold difference
   public static final double _threshold = 0.05;
   //Target Height
   public static double _target = 0;
   //Elevator Speed
-  public static final double _elevatorSpeed = 0.4;
+  public static final double _elevatorSpeed = 0.2;
+
+  public static int testloop = 0;
 
   @Override
   public void initDefaultCommand() {
@@ -86,11 +88,11 @@ import edu.wpi.first.wpilibj.AnalogInput;
         _target = _lowShoot;
       }
     } 
-    // else if (Robot.m_oi.m_Controller2.getRawButton(10) == true) { //Overide Down
-    //   _target = 0;
-    // } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) { //Overide Up
-    //   _target = 0;
-    // } 
+    else if (Robot.m_oi.m_Controller2.getRawButton(9) == true) { //Overide Up
+      _target = 0;
+    } else if (Robot.m_oi.m_Controller2.getRawButton(10) == true) { //Overide Downn
+      _target = 0;
+    } 
 
     if(_target != 0.0 ){
       if(_target < _base){
@@ -109,23 +111,23 @@ import edu.wpi.first.wpilibj.AnalogInput;
         _elevatorLeft.set(0);
       }  
     } 
-    // else {
-    //   if (Robot.m_oi.m_Controller1.getRawAxis(2) > 0.1) { //Overide Down
-    //     if(_ai.getAverageVoltage() > _base){
-    //       _elevatorLeft.set(-_elevatorSpeed);  
-    //     } else {
-    //       _elevatorLeft.set(0);  
-    //     }
-    //   } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) { //Overide Up
-    //     if(_ai.getAverageVoltage() < _highShoot){
-    //       _elevatorLeft.set(_elevatorSpeed);  
-    //     } else {
-    //       _elevatorLeft.set(0);
-    //     }
-    //   } else {
-    //     _elevatorLeft.set(0);
-    //   }
-    // }
+    else {
+      if (Robot.m_oi.m_Controller2.getRawButton(9) == true) { //Overide Up
+        if(_ai.getAverageVoltage() > _base){
+          _elevatorLeft.set(-_elevatorSpeed);  
+        } else {
+          _elevatorLeft.set(0);  
+        }
+      } else if (Robot.m_oi.m_Controller2.getRawButton(10) == true) { //Overide Down
+        if(_ai.getAverageVoltage() < _highShoot){
+          _elevatorLeft.set(_elevatorSpeed);  
+        } else {
+          _elevatorLeft.set(0);
+        }
+      } else {
+        _elevatorLeft.set(0);
+      }
+    }
 
 
     // if(Robot.m_oi.m_Controller2.getRawAxis(2) > 0.1) {
@@ -231,11 +233,15 @@ import edu.wpi.first.wpilibj.AnalogInput;
     //     _elevatorRight.set(0);
     //   }
     // }
-  SmartDashboard.putNumber("Accumulator Value", _ai.getAverageVoltage());
-  SmartDashboard.putNumber("Target", _target);
-  SmartDashboard.putBoolean("Button Pressed", Robot.m_oi.m_Controller2.getBButtonPressed());
-  SmartDashboard.putBoolean("Button Pressed", Robot.m_oi.m_Controller2.getXButtonPressed());
-  SmartDashboard.putBoolean("Button Pressed", Robot.m_oi.m_Controller2.getYButtonPressed());
-  SmartDashboard.putBoolean("Button Pressed", Robot.m_oi.m_Controller2.getAButtonPressed());
+
+    if(testloop++ > 10){
+      testloop = 0;
+     SmartDashboard.putNumber("Accumulator Value", _ai.getAverageVoltage());
+     SmartDashboard.putNumber("Target", _target);
+    }
+  // SmartDashboard.putBoolean("Button Pressed", Robot.m_oi.m_Controller2.getBButtonPressed());
+  // SmartDashboard.putBoolean("Button Pressed", Robot.m_oi.m_Controller2.getXButtonPressed());
+  // SmartDashboard.putBoolean("Button Pressed", Robot.m_oi.m_Controller2.getYButtonPressed());
+  // SmartDashboard.putBoolean("Button Pressed", Robot.m_oi.m_Controller2.getAButtonPressed());
   }
 }

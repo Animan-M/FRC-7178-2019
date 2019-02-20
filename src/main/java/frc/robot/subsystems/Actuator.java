@@ -43,16 +43,17 @@ public class Actuator extends Subsystem {
   public static DigitalInput _fl_ul = new DigitalInput(6);
   public static DigitalInput _fl_ll = new DigitalInput(7);
 
-  public static final double _fl_speed = 0.55;
-  public static final double _fr_speed = 0.51;
-  public static final double _bl_speed = 0.55;
-  public static final double _br_speed = 0.52;
+  public static final double _fl_speed = 0.75;
+  public static final double _fr_speed = 0.77;
+  public static final double _bl_speed = 0.75;
+  public static final double _br_speed = 0.78;
 
   public static boolean _fr_UP = false;
   public static boolean _fl_UP = false;
   public static boolean _bl_UP = false;
   public static boolean _br_UP = false;
 
+  public static int testloop = 0;
   //upperlimits 0,2,4,6
   //lowerlimits 1,3,5,7
   //FR, BR, BL, FL
@@ -185,7 +186,7 @@ public class Actuator extends Subsystem {
       if(_br_ul.get() == false){
         _liftBackRight.set(-_br_speed);
       }else{
-        if(_liftBackRight.getOutputCurrent() > 10 && _br_UP == false){
+        if(_liftBackRight.getOutputCurrent() > 20 && _br_UP == false){
           _br_UP =true;
           _liftBackRight.set(0);
         }else{
@@ -252,30 +253,34 @@ public class Actuator extends Subsystem {
       _liftBackRight.enableCurrentLimit(false);
     }
 
-    SmartDashboard.putBoolean("Limit FR UL", _fr_ul.get());
-    SmartDashboard.putBoolean("Limit FR LL", _fr_ll.get());
-    SmartDashboard.putBoolean("Limit BR UL", _br_ul.get());
-    SmartDashboard.putBoolean("Limit BR LL", _br_ll.get());
-    SmartDashboard.putBoolean("Limit BL UL", _bl_ul.get());
-    SmartDashboard.putBoolean("Limit BL LL", _bl_ll.get());
-    SmartDashboard.putBoolean("Limit FL UL", _fl_ul.get());
-    SmartDashboard.putBoolean("Limit FL LL", _fl_ll.get());
-    SmartDashboard.putNumber("FR LAST Current",_lastCurrentFR);
-    SmartDashboard.putNumber("BR LAST Current",_lastCurrentBL);
-    SmartDashboard.putNumber("BL LAST Current",_lastCurrentBR);
-    SmartDashboard.putNumber("FL LAST Current",_lastCurrentFL);
-
-    SmartDashboard.putNumber("FR Current",_liftFrontRight.getOutputCurrent());
-    SmartDashboard.putNumber("BR Current",_liftBackRight.getOutputCurrent());
-    SmartDashboard.putNumber("BL Current",_liftBackLeft.getOutputCurrent());
-    SmartDashboard.putNumber("FL Current",_liftFrontLeft.getOutputCurrent());
-
-    SmartDashboard.putBoolean("END GAME FL UP", _fl_UP);
-    SmartDashboard.putBoolean("END GAME FR UP", _fr_UP);
-    SmartDashboard.putBoolean("END GAME BL UP", _bl_UP);
-    SmartDashboard.putBoolean("END GAME BR UP", _br_UP);
-
-    // SmartDashboard.putNumber("Gyro x", _gyro.)
+    if(testloop++ > 10){
+      testloop =0;
+      SmartDashboard.putBoolean("Limit FR UL", _fr_ul.get());
+      SmartDashboard.putBoolean("Limit FR LL", _fr_ll.get());
+      SmartDashboard.putBoolean("Limit BR UL", _br_ul.get());
+      SmartDashboard.putBoolean("Limit BR LL", _br_ll.get());
+      SmartDashboard.putBoolean("Limit BL UL", _bl_ul.get());
+      SmartDashboard.putBoolean("Limit BL LL", _bl_ll.get());
+      SmartDashboard.putBoolean("Limit FL UL", _fl_ul.get());
+      SmartDashboard.putBoolean("Limit FL LL", _fl_ll.get());
+      // SmartDashboard.putNumber("FR LAST Current",_lastCurrentFR);
+      // SmartDashboard.putNumber("BR LAST Current",_lastCurrentBL);
+      // SmartDashboard.putNumber("BL LAST Current",_lastCurrentBR);
+      // SmartDashboard.putNumber("FL LAST Current",_lastCurrentFL);
+  
+      // SmartDashboard.putNumber("FR Current",_liftFrontRight.getOutputCurrent());
+      // SmartDashboard.putNumber("BR Current",_liftBackRight.getOutputCurrent());
+      // SmartDashboard.putNumber("BL Current",_liftBackLeft.getOutputCurrent());
+      // SmartDashboard.putNumber("FL Current",_liftFrontLeft.getOutputCurrent());
+  
+      // SmartDashboard.putBoolean("END GAME FL UP", _fl_UP);
+      // SmartDashboard.putBoolean("END GAME FR UP", _fr_UP);
+      // SmartDashboard.putBoolean("END GAME BL UP", _bl_UP);
+      // SmartDashboard.putBoolean("END GAME BR UP", _br_UP);
+  
+      // SmartDashboard.putNumber("Gyro x", _gyro.)
+  
+    }
 
   }
 

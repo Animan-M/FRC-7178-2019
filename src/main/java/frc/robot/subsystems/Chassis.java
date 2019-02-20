@@ -23,7 +23,7 @@ public class Chassis extends Subsystem {
   public final static WPI_TalonSRX _motorBackLeft = RobotMap._motorBackLeft;
   public final static WPI_TalonSRX _motorFrontRight = RobotMap._motorFrontRight;
   public final static WPI_TalonSRX _motorBackRight = RobotMap._motorBackRight;
-  DifferentialDrive m_driveType = new DifferentialDrive(RobotMap._motorFrontLeft, RobotMap._motorFrontRight);
+  public static DifferentialDrive m_driveType = new DifferentialDrive(RobotMap._motorFrontLeft, RobotMap._motorFrontRight);
 
   @Override
   public void initDefaultCommand() {
@@ -38,6 +38,10 @@ public class Chassis extends Subsystem {
   }
 
   public void drive() {
-    m_driveType.tankDrive(-Robot.m_oi.m_Controller1.getRawAxis(1), -Robot.m_oi.m_Controller1.getRawAxis(5));   
+    double leftMotor = Robot.m_oi.m_Controller1.getRawAxis(1);
+    double rightMotor = Robot.m_oi.m_Controller1.getRawAxis(5);
+    // leftMotor = leftMotor * leftMotor*leftMotor;
+    // rightMotor = rightMotor * rightMotor * rightMotor;
+    m_driveType.tankDrive(-leftMotor, -rightMotor);   
   }
 }
