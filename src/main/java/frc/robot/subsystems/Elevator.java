@@ -130,16 +130,16 @@ import edu.wpi.first.wpilibj.AnalogInput;
     }
 
 
-    // if(Robot.m_oi.m_Controller2.getRawAxis(2) > 0.1) {
-    //   _elevatorLeft.set(_elevatorSpeed);
-    //   _elevatorRight.set(_elevatorSpeed);
-    // } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) {
-    //   _elevatorLeft.set(-_elevatorSpeed);
-    //   _elevatorRight.set(-_elevatorSpeed);
-    // } else {
-    //   _elevatorLeft.set(0);
-    //   _elevatorRight.set(0);
-    // }
+    if(Robot.m_oi.m_Controller2.getRawButton(8) == true) {
+      _elevatorLeft.set(_elevatorSpeed);
+      _elevatorRight.set(_elevatorSpeed);
+    } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) {
+      _elevatorLeft.set(-_elevatorSpeed);
+      _elevatorRight.set(-_elevatorSpeed);
+    } else {
+      _elevatorLeft.set(0);
+      _elevatorRight.set(0);
+    }
 
     
 
@@ -154,7 +154,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
     //     _elevatorLeft.set(-_elevatorSpeed);
     //     _elevatorRight.set(-_elevatorSpeed);
     //     _hatchCount = _hatchCount + 1;
-    //   } else if(_ai.getAverageVoltage() > _highHatch + _threshold && _hatchCount == 2) {
+    //     Robot.m_oi.m_Controller2.getRawButton(3)    //   } else if(_ai.getAverageVoltage() > _highHatch + _threshold && _hatchCount == 2) {
     //     _elevatorLeft.set(-_elevatorSpeed);
     //     _elevatorRight.set(-_elevatorSpeed);
     //     _hatchCount = _hatchCount + 1;
@@ -164,7 +164,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
     //   }
     // }
 
-    // if(Robot.m_oi.m_Controller2.getRawButton(3) == true) {
+    // if( == true) {
     //   if(_ai.getAverageVoltage() < _lowHatch - _threshold && _hatchCount == 1) {
     //     _elevatorLeft.set(_elevatorSpeed);
     //     _elevatorRight.set(_elevatorSpeed);

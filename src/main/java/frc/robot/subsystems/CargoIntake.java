@@ -43,7 +43,7 @@ public class CargoIntake extends Subsystem {
     } else if (Robot.m_oi.m_Controller2.getPOV() == 180) { 
     _upperIntake.set(true);
     _lowerIntakeRight.set(true);
-    } else if (Robot.m_oi.m_Controller2.getPOV() == 180) { //End Gamw
+    } else if (Robot.m_oi.m_Controller2.getPOV() == 90) { //End Gamw
     _upperIntake.set(false);
     _lowerIntakeRight.set(false);
     } else { 

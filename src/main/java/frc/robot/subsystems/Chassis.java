@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import frc.robot.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.RobotMap;
 import frc.robot.commands.teleopDrive;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 /**
@@ -25,6 +24,12 @@ public class Chassis extends Subsystem {
   public final static WPI_TalonSRX _motorBackRight = RobotMap._motorBackRight;
   public static DifferentialDrive m_driveType = new DifferentialDrive(RobotMap._motorFrontLeft, RobotMap._motorFrontRight);
 
+  public static double forward;
+  public static double backwards;
+  public static double turn;
+  public static double turnDif;
+  public static double driveDif;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
@@ -34,14 +39,32 @@ public class Chassis extends Subsystem {
   public void driveSetUp() {
     _motorBackLeft.follow(_motorFrontLeft);
     _motorBackRight.follow(_motorFrontRight);
-    m_driveType.setSafetyEnabled(false);
+    turnDif = 0.75;
+    driveDif = 0.85;
   }
 
   public void drive() {
-    double leftMotor = Robot.m_oi.m_Controller1.getRawAxis(1);
-    double rightMotor = Robot.m_oi.m_Controller1.getRawAxis(5);
+    forward = driveDif*Robot.m_oi.m_Controller1.getRawAxis(3);
+    backwards = -driveDif*Robot.m_oi.m_Controller1.getRawAxis(2);
+    turn = turnDif*Robot.m_oi.m_Controller1.getRawAxis(0);
+
+    double move = 0;
+
+    if(forward > 0) {
+      move = forward;
+    } else if (backwards < 0) {
+      move = backwards;
+    } else {
+      move = 0;
+    }
+
+    
+    m_driveType.arcadeDrive(move, turn);
+    
+    // double leftMotor = Robot.m_oi.m_Controller1.getRawAxis(1);
+    // double rightMotor = Robot.m_oi.m_Controller1.getRawAxis(5);
     // leftMotor = leftMotor * leftMotor*leftMotor;
     // rightMotor = rightMotor * rightMotor * rightMotor;
-    m_driveType.tankDrive(-leftMotor, -rightMotor);   
+    // m_driveType.tankDrive(-leftMotor, -rightMotor);   
   }
 }
