@@ -44,9 +44,9 @@ public class Actuator extends Subsystem {
   public static DigitalInput _fl_ll = new DigitalInput(7);
 
   public static final double _fl_speed = 0.75;
-  public static final double _fr_speed = 0.77;
+  public static final double _fr_speed = 0.75;
   public static final double _bl_speed = 0.75;
-  public static final double _br_speed = 0.78;
+  public static final double _br_speed = 0.75;
 
   public static boolean _fr_UP = false;
   public static boolean _fl_UP = false;

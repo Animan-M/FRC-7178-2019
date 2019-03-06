@@ -21,21 +21,21 @@ import edu.wpi.first.wpilibj.AnalogInput;
   public final static WPI_VictorSPX _elevatorRight = RobotMap._elevatorRight;
   public static AnalogInput _ai = new AnalogInput(3);
   //Hatch levels
-  public static final double _lowHatch = 0.17;
-  public static final double _midHatch = 2.05;
-  public static final double _highHatch = 3.80;
+  public static final double _lowHatch = 0.11;
+  public static final double _midHatch = 2.00;
+  public static final double _highHatch = 3.70;
   //Cargo levels
-  public static final double _lowShoot = 0.8;
-  public static final double _midShoot = 2.5;
-  public static final double _highShoot = 4.26;
+  public static final double _lowShoot = 0.71;
+  public static final double _midShoot = 2.47;
+  public static final double _highShoot = 3.00;
   //Bottom level
-  public static final double _base = 0.17;
+  public static final double _base = 0.09;
   //Threshold difference
   public static final double _threshold = 0.05;
   //Target Height
   public static double _target = 0;
   //Elevator Speed
-  public static final double _elevatorSpeed = 0.2;
+  public static final double _elevatorSpeed = 0.4;
 
   public static int testloop = 0;
 
@@ -130,16 +130,16 @@ import edu.wpi.first.wpilibj.AnalogInput;
     }
 
 
-    if(Robot.m_oi.m_Controller2.getRawButton(8) == true) {
-      _elevatorLeft.set(_elevatorSpeed);
-      _elevatorRight.set(_elevatorSpeed);
-    } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) {
-      _elevatorLeft.set(-_elevatorSpeed);
-      _elevatorRight.set(-_elevatorSpeed);
-    } else {
-      _elevatorLeft.set(0);
-      _elevatorRight.set(0);
-    }
+    // if(Robot.m_oi.m_Controller2.getRawButton(8) == true) {
+    //   _elevatorLeft.set(_elevatorSpeed);
+    //   _elevatorRight.set(_elevatorSpeed);
+    // } else if (Robot.m_oi.m_Controller2.getRawButton(5) == true) {
+    //   _elevatorLeft.set(-_elevatorSpeed);
+    //   _elevatorRight.set(-_elevatorSpeed);
+    // } else {
+    //   _elevatorLeft.set(0);
+    //   _elevatorRight.set(0);
+    // }
 
     
 
