@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
   //Cargo levels
   public static final double _lowShoot = 0.71;
   public static final double _midShoot = 2.47;
-  public static final double _highShoot = 3.00;
+  public static final double _highShoot = 3.9;
   //Bottom level
   public static final double _base = 0.09;
   //Threshold difference
