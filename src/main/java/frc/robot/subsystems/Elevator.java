@@ -21,13 +21,13 @@ import edu.wpi.first.wpilibj.AnalogInput;
   public final static WPI_VictorSPX _elevatorRight = RobotMap._elevatorRight;
   public static AnalogInput _ai = new AnalogInput(3);
   //Hatch levels
-  public static final double _lowHatch = 0.11;
-  public static final double _midHatch = 2.00;
-  public static final double _highHatch = 3.70;
+  public static final double _lowHatch = 0.12;
+  public static final double _midHatch = 1.90;
+  public static final double _highHatch = 3.68;
   //Cargo levels
-  public static final double _lowShoot = 0.71;
-  public static final double _midShoot = 2.47;
-  public static final double _highShoot = 3.9;
+  public static final double _lowShoot = 0.73;
+  public static final double _midShoot = 2.43;
+  public static final double _highShoot = 4.14;
   //Bottom level
   public static final double _base = 0.09;
   //Threshold difference
@@ -35,7 +35,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
   //Target Height
   public static double _target = 0;
   //Elevator Speed
-  public static final double _elevatorSpeed = 0.4;
+  public static final double _elevatorSpeed = 0.8;
 
   public static int testloop = 0;
 

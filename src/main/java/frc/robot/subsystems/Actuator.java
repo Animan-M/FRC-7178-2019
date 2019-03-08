@@ -78,7 +78,53 @@ public class Actuator extends Subsystem {
   }
 
   public void Down() {
+      
+    if(Robot.m_oi.m_Controller1.getRawButton(3) == true) {
+      if(_fr_ll.get() == false) {
+        _liftFrontRight.set(-_fr_speed);
+      } else {
+        _liftFrontRight.set(0);
+      }
+      if(_fl_ll.get() == false) {
+        _liftFrontLeft.set(-_fl_speed);
+      } else {
+        _liftFrontLeft.set(0);
+      }
+    } else if(Robot.m_oi.m_Controller1.getRawButton(8) == true) {
+      if(_fr_ll.get() == false) {
+        _liftFrontRight.set(-_fr_speed);
+      } else {
+        _liftFrontRight.set(0);
+      }
+      if(_fl_ll.get() == false) {
+        _liftFrontLeft.set(-_fl_speed);
+      } else {
+        _liftFrontLeft.set(0);
+      }
+      if(_br_ul.get() == false) {
+        _liftBackRight.set(_br_speed);
+      } else {
+        _liftBackRight.set(0);
+      }
+      if(_bl_ul.get() == false) {
+        _liftBackLeft.set(_bl_speed);
+      } else {
+        _liftBackLeft.set(0);
+      }
+    } else if(Robot.m_oi.m_Controller1.getRawButton(1)) {
+      if(_br_ll.get() == false) {
+        _liftBackRight.set(-_br_speed);
+      } else {
+        _liftBackRight.set(0);
+      }
+      if(_bl_ll.get() == false) {
+        _liftBackLeft.set(-_bl_speed);
+      } else {
+        _liftBackLeft.set(0);
+      }
+    }
 
+/*
     //check the buttons measure the current.
     if((Robot.m_oi.m_Controller1.getRawButton(3) == true)) {
       if(_fr_ll.get() == false){
@@ -213,7 +259,7 @@ public class Actuator extends Subsystem {
       if(_fl_ul.get() == false){
         _liftFrontLeft.set(-_fl_speed);
       }else{
-        if(_liftFrontLeft.getOutputCurrent() > 10 && _fl_UP == false){
+        if(_liftFrontLeft.getOutputCurrent() > 10 || _fl_UP == false){
           _fl_UP =true;
           _liftFrontLeft.set(0);
         }else{
@@ -253,6 +299,7 @@ public class Actuator extends Subsystem {
       _liftBackRight.enableCurrentLimit(false);
     }
 
+*/    
     if(testloop++ > 10){
       testloop =0;
       SmartDashboard.putBoolean("Limit FR UL", _fr_ul.get());
