@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
   public static final double _highShoot = 4.14;
   //Bottom level
   public static final double _base = 0.09;
+  public static final double _MidCargo = 1.42;
   //Threshold difference
   public static final double _threshold = 0.05;
   //Target Height
@@ -87,8 +88,11 @@ import edu.wpi.first.wpilibj.AnalogInput;
       } else if (_ai.getAverageVoltage() > _lowShoot + _threshold) {
         _target = _lowShoot;
       }
-    } 
-    else if (Robot.m_oi.m_Controller2.getRawButton(9) == true) { //Overide Up
+    } else if(Robot.m_oi.m_Controller2.getRawButton(8) == true) {
+      if(_ai.getAverageVoltage() < _MidCargo - _threshold) {
+        _target = _MidCargo;
+      }
+    } else if (Robot.m_oi.m_Controller2.getRawButton(9) == true) { //Overide Up
       _target = 0;
     } else if (Robot.m_oi.m_Controller2.getRawButton(10) == true) { //Overide Downn
       _target = 0;

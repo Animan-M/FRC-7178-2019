@@ -40,7 +40,7 @@ public class Chassis extends Subsystem {
     _motorBackLeft.follow(_motorFrontLeft);
     _motorBackRight.follow(_motorFrontRight);
     turnDif = 0.75;
-    driveDif = 0.85;
+    driveDif = 0.80;
   }
 
   public void drive() {

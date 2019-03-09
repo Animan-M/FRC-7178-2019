@@ -78,8 +78,9 @@ public class Actuator extends Subsystem {
   }
 
   public void Down() {
-      
-    if(Robot.m_oi.m_Controller1.getRawButton(3) == true) {
+    
+    /*
+    if(Robot.m_oi.m_Controller1.getRawButton(3) == true) { //Pushes Front Two Down
       if(_fr_ll.get() == false) {
         _liftFrontRight.set(-_fr_speed);
       } else {
@@ -90,7 +91,7 @@ public class Actuator extends Subsystem {
       } else {
         _liftFrontLeft.set(0);
       }
-    } else if(Robot.m_oi.m_Controller1.getRawButton(8) == true) {
+    } else if(Robot.m_oi.m_Controller1.getRawButton(8) == true) { //Pulls Front 2 up and Pushes Back two down
       if(_fr_ll.get() == false) {
         _liftFrontRight.set(-_fr_speed);
       } else {
@@ -111,7 +112,7 @@ public class Actuator extends Subsystem {
       } else {
         _liftBackLeft.set(0);
       }
-    } else if(Robot.m_oi.m_Controller1.getRawButton(1)) {
+    } else if(Robot.m_oi.m_Controller1.getRawButton(1)) { //Pulls Back Two Up
       if(_br_ll.get() == false) {
         _liftBackRight.set(-_br_speed);
       } else {
@@ -122,98 +123,149 @@ public class Actuator extends Subsystem {
       } else {
         _liftBackLeft.set(0);
       }
+    } else if(Robot.m_oi.m_Controller1.getRawButton(9)) { // Pulls All Four Up
+      if(_br_ll.get() == false) {
+        _liftBackRight.set(-_br_speed);
+      } else {
+        _liftBackRight.set(0);
+      }
+      if(_bl_ll.get() == false) {
+        _liftBackLeft.set(-_bl_speed);
+      } else {
+        _liftBackLeft.set(0);
+      }
+
     }
 
-/*
+    */
+
+
     //check the buttons measure the current.
-    if((Robot.m_oi.m_Controller1.getRawButton(3) == true)) {
-      if(_fr_ll.get() == false){
-        _liftFrontRight.set(_fr_speed);
-        _lastCurrentFR = _liftFrontRight.getOutputCurrent();
-      }else{
-        _liftFrontRight.set(0);
-      }
-      if(_br_ll.get() == false){
+    if((Robot.m_oi.m_Controller1.getRawButton(3) == true)) { // Back Down
+      if(_br_ul.get() == false){
         _liftBackRight.set(_br_speed);
         _lastCurrentBR = _liftBackRight.getOutputCurrent();
       }else{
         _liftBackRight.set(0);
       }
-      if(_bl_ll.get() == false){
+      // if(_br_ll.get() == false){
+      //   _liftBackRight.set(_br_speed);
+      //   _lastCurrentBR = _liftBackRight.getOutputCurrent();
+      // }else{
+      //   _liftBackRight.set(0);
+      // }
+      // if(_bl_ll.get() == false){
+      //   _liftBackLeft.set(_bl_speed);
+      // }else{
+      //   _liftBackLeft.set(0.0);
+      //   _lastCurrentBL = _liftBackLeft.getOutputCurrent();
+      // }
+      if(_bl_ul.get() == false){
         _liftBackLeft.set(_bl_speed);
+        _lastCurrentBL = _liftBackLeft.getOutputCurrent();
       }else{
         _liftBackLeft.set(0.0);
-        _lastCurrentBL = _liftBackLeft.getOutputCurrent();
       }
-      if(_fl_ll.get() == false){
-        _liftFrontLeft.set(_fl_speed);
-        _lastCurrentFL = _liftFrontLeft.getOutputCurrent();
-      }else{
-        _liftFrontLeft.set(0.0);
-      }
-    }else if((Robot.m_oi.m_Controller1.getRawButton(8) == true)) {
+
+    }else if((Robot.m_oi.m_Controller1.getRawButton(1) == true)) { //All four down
         _lastCurrentFL = _liftFrontLeft.getOutputCurrent();
         _lastCurrentBL = _liftBackLeft.getOutputCurrent();
         _lastCurrentFR = _liftFrontRight.getOutputCurrent();
         _lastCurrentBR = _liftBackRight.getOutputCurrent();
 
+        // if(_fr_ll.get() == false){
+        //   _liftFrontRight.set(-_fr_speed);
+        // }else{
+          // if(_liftBackRight.getOutputCurrent() > 15 /*&& _fr_UP == false*/){
+          //   // _fr_UP =true;
+          //   _liftBackRight.set(0);
+          // }else{
+          //   // if(_fr_UP == false){
+          //     _liftBackRight.set(-_br_speed);
+          //   // }else{
+          //   //   _liftFrontRight.set(0);
+          //   // }
+          // }
+        // }
+        // if(_br_ul.get() == false){
+        //   _liftBackRight.set(-_br_speed);
+        // }else{
+        //   if(_liftBackRight.getOutputCurrent() > 10 && _br_UP == false){
+        //     _br_UP =true;
+        //     _liftBackRight.set(0);
+        //   }else{
+        //     if(_br_UP == false){
+        //       _liftBackRight.set(-_br_speed);
+        //     }else{
+        //       _liftBackRight.set(0);
+        //     }
+        //   }
+        // }
+        // if(_bl_ul.get() == false){
+        //   _liftBackLeft.set(-_bl_speed);
+        // }else{
+        //   if(_liftBackLeft.getOutputCurrent() > 10 && _bl_UP == false){
+        //     _bl_UP =true;
+        //     _liftBackLeft.set(0);
+        //   }else{
+        //     if(_bl_UP == false){
+        //       _liftBackLeft.set(-_bl_speed);
+        //     }else{
+        //       _liftBackLeft.set(0);
+        //     }
+        //   }
+        // }
+        // if(_fl_ll.get() == false){
+        //   _liftFrontLeft.set(-_fl_speed);
+        // }else{
+          // if(_liftBackLeft.getOutputCurrent() > 15 /*&& _fl_UP == false*/){
+          //   // _fl_UP =true;
+          //   _liftBackLeft.set(0);
+          // }else{
+          //   // if(_fl_UP == false){
+          //     _liftBackLeft.set(-_bl_speed);
+          //   // }else{
+          //   //   _liftFrontLeft.set(0);
+          //   // }
+          // }
+        // }
+        // if(_br_ul.get() == false){
+        //   _liftBackRight.set(_br_speed);
+        //   _lastCurrentBR = _liftBackRight.getOutputCurrent();
+        // }else{
+        //   _liftBackRight.set(0);
+        // }
+        // if(_bl_ul.get() == false){
+        //   _liftBackLeft.set(_bl_speed);
+        //   _lastCurrentBL = _liftBackLeft.getOutputCurrent();
+        // }else{
+        //   _liftBackLeft.set(0);
+        // }
         if(_fr_ul.get() == false){
-          _liftFrontRight.set(-_fr_speed);
+          _liftFrontRight.set(_fr_speed);
+          _lastCurrentFR = _liftFrontRight.getOutputCurrent();
         }else{
-          if(_liftFrontRight.getOutputCurrent() > 10 && _fr_UP == false){
-            _fr_UP =true;
-            _liftFrontRight.set(0);
-          }else{
-            if(_fr_UP == false){
-              _liftFrontRight.set(-_fr_speed);
-            }else{
-              _liftFrontRight.set(0);
-            }
-          }
-        }
-        if(_br_ul.get() == false){
-          _liftBackRight.set(-_br_speed);
-        }else{
-          if(_liftBackRight.getOutputCurrent() > 10 && _br_UP == false){
-            _br_UP =true;
-            _liftBackRight.set(0);
-          }else{
-            if(_br_UP == false){
-              _liftBackRight.set(-_br_speed);
-            }else{
-              _liftBackRight.set(0);
-            }
-          }
-        }
-        if(_bl_ul.get() == false){
-          _liftBackLeft.set(-_bl_speed);
-        }else{
-          if(_liftBackLeft.getOutputCurrent() > 10 && _bl_UP == false){
-            _bl_UP =true;
-            _liftBackLeft.set(0);
-          }else{
-            if(_bl_UP == false){
-              _liftBackLeft.set(-_bl_speed);
-            }else{
-              _liftBackLeft.set(0);
-            }
-          }
+          _liftFrontRight.set(0);
         }
         if(_fl_ul.get() == false){
-          _liftFrontLeft.set(-_fl_speed);
+          _liftFrontLeft.set(_fl_speed);
+          _lastCurrentFL = _liftFrontLeft.getOutputCurrent();
         }else{
-          if(_liftFrontLeft.getOutputCurrent() > 10 && _fl_UP == false){
-            _fl_UP =true;
-            _liftFrontLeft.set(0);
-          }else{
-            if(_fl_UP == false){
-              _liftFrontLeft.set(-_fl_speed);
-            }else{
-              _liftFrontLeft.set(0);
-            }
-          }
+          _liftFrontLeft.set(0);
         }
-    
+        if(_bl_ul.get() == false){
+          _liftBackLeft.set(_bl_speed);
+          _lastCurrentBL = _liftBackLeft.getOutputCurrent();
+        }else{
+          _liftBackLeft.set(0.0);
+        }
+        if(_br_ul.get() == false){
+          _liftBackRight.set(_br_speed);
+          _lastCurrentBR = _liftBackRight.getOutputCurrent();
+        }else{
+          _liftBackRight.set(0);
+        }
+
     // } else if ((Robot.m_oi.m_Controller1.getRawButton(8) == false) && (Robot.m_oi.m_Joystick2.getRawButton(7) ==true) && (Robot.m_oi.m_Joystick2.getRawButton(8) == true)){
       // _liftFrontLeft.configPeakCurrentLimit((int)_lastCurrentFL +1);
       // _liftBackLeft.configPeakCurrentLimit((int)_lastCurrentBL +1);
@@ -227,8 +279,9 @@ public class Actuator extends Subsystem {
       // _liftBackLeft.enableCurrentLimit(true);
       // _liftFrontRight.enableCurrentLimit(true);
       // _liftBackRight.enableCurrentLimit(true);
-    } else if (Robot.m_oi.m_Controller1.getRawButton(1) == true) {
+    } else if (Robot.m_oi.m_Controller1.getRawButton(2) == true) {
       // Back comes up
+      /*
       if(_br_ul.get() == false){
         _liftBackRight.set(-_br_speed);
       }else{
@@ -253,9 +306,67 @@ public class Actuator extends Subsystem {
         _lastCurrentFR = _liftFrontRight.getOutputCurrent();
       }else{
         _liftFrontRight.set(0);
-      }      
-    } else if (Robot.m_oi.m_Controller1.getRawButton(2) == true) {
+      }
+      */
+      // if(_br_ll.get() == false){
+      //   _liftBackRight.set(-_br_speed);
+      // }else{
+        if(_liftBackRight.getOutputCurrent() > 15 /*&& _br_UP == false*/){
+          // _br_UP =true;
+          _liftBackRight.set(0);
+        }else{
+          // if(_br_UP == false){
+            _liftBackRight.set(-_br_speed);
+          // }else{
+          //   _liftBackRight.set(0);
+          // }
+        }
+      // }
+
+
+      // if(_bl_ll.get() == false){
+      //   _liftBackLeft.set(-_bl_speed);
+      // }else{
+        if(_liftBackLeft.getOutputCurrent() > 15 /*&& _bl_UP == false*/){
+          // _bl_UP =true;
+          _liftBackLeft.set(0);
+        }else{
+          // if(_bl_UP == false){
+            _liftBackLeft.set(-_bl_speed);
+          // }else{
+          //   _liftBackLeft.set(0);
+          // }
+        }
+      // }
+      if(_fr_ul.get() == false){
+        _liftFrontRight.set(_fr_speed);
+        _lastCurrentFR = _liftFrontRight.getOutputCurrent();
+      }else{
+        _liftFrontRight.set(0);
+      }
+      if(_fl_ul.get() == false){
+        _liftFrontLeft.set(_fl_speed);
+        _lastCurrentFL = _liftFrontLeft.getOutputCurrent();
+      }else{
+        _liftFrontLeft.set(0);
+      }
+      
+    } else if(Robot.m_oi.m_Controller2.getRawButton(4) == true){
+      if(_liftFrontRight.getOutputCurrent() > 15 /*&& _fr_UP == false*/){
+        _liftFrontRight.set(0);
+      }else{
+        _liftFrontRight.set(-_fr_speed);
+      }
+      if(_liftFrontLeft.getOutputCurrent() > 15 /*&& _fl_UP == false*/){
+        // _fl_UP =true;
+        _liftFrontLeft.set(0);
+      }else{
+          _liftFrontLeft.set(-_fl_speed);
+      }
+
+    } else if (Robot.m_oi.m_Controller1.getRawButton(8) == true) {
       //Front comes up
+      /*
       if(_fl_ul.get() == false){
         _liftFrontLeft.set(-_fl_speed);
       }else{
@@ -284,6 +395,75 @@ public class Actuator extends Subsystem {
           }
         }
       }
+      */
+
+      // if(_br_ll.get() == false){
+      //   _liftBackRight.set(-_br_speed);
+      // }else{
+        if(_liftBackRight.getOutputCurrent() > 15 /*&& _br_UP == false*/){
+          // _br_UP =true;
+          _liftBackRight.set(0);
+        }else{
+          // if(_br_UP == false){
+            _liftBackRight.set(-_br_speed);
+          // }else{
+          //   _liftBackRight.set(0);
+          // }
+        }
+      // }
+
+      // if(_bl_ll.get() == false){
+      //   _liftBackLeft.set(-_bl_speed);
+      // }else{
+        if(_liftBackLeft.getOutputCurrent() > 15 /*&& _bl_UP == false*/){
+          // _bl_UP =true;
+          _liftBackLeft.set(0);
+        }else{
+          // if(_bl_UP == false){
+            _liftBackLeft.set(-_bl_speed);
+          // }else{
+          //   _liftBackLeft.set(0);
+          // }
+        }
+      // }
+
+
+      // if(_fr_ll.get() == false){
+      //   _liftFrontRight.set(-_fr_speed);
+      // }else{
+        if(_liftFrontRight.getOutputCurrent() > 15 /*&& _fr_UP == false*/){
+          // _fr_UP =true;
+          _liftFrontRight.set(0);
+        }else{
+          // if(_fr_UP == false){
+            _liftFrontRight.set(-_fr_speed);
+          // }else{
+          //   _liftFrontRight.set(0);
+          // }
+        }
+      // }
+
+
+      // if(_fl_ll.get() == false){
+      //   _liftFrontLeft.set(-_fl_speed);
+      // }else{
+        if(_liftFrontLeft.getOutputCurrent() > 15 /*&& _fl_UP == false*/){
+          // _fl_UP =true;
+          _liftFrontLeft.set(0);
+        }else{
+          // if(_fl_UP == false){
+            _liftFrontLeft.set(-_fl_speed);
+          // }else{
+          //   _liftFrontLeft.set(0);
+          // }
+        }
+      // }
+
+
+
+      
+
+
      } else { 
        _liftFrontLeft.set(0);
       _liftBackLeft.set(0);
@@ -298,8 +478,7 @@ public class Actuator extends Subsystem {
       _liftFrontRight.enableCurrentLimit(false);
       _liftBackRight.enableCurrentLimit(false);
     }
-
-*/    
+    
     if(testloop++ > 10){
       testloop =0;
       SmartDashboard.putBoolean("Limit FR UL", _fr_ul.get());
@@ -310,15 +489,15 @@ public class Actuator extends Subsystem {
       SmartDashboard.putBoolean("Limit BL LL", _bl_ll.get());
       SmartDashboard.putBoolean("Limit FL UL", _fl_ul.get());
       SmartDashboard.putBoolean("Limit FL LL", _fl_ll.get());
-      // SmartDashboard.putNumber("FR LAST Current",_lastCurrentFR);
-      // SmartDashboard.putNumber("BR LAST Current",_lastCurrentBL);
-      // SmartDashboard.putNumber("BL LAST Current",_lastCurrentBR);
-      // SmartDashboard.putNumber("FL LAST Current",_lastCurrentFL);
+      SmartDashboard.putNumber("FR LAST Current",_lastCurrentFR);
+      SmartDashboard.putNumber("BR LAST Current",_lastCurrentBL);
+      SmartDashboard.putNumber("BL LAST Current",_lastCurrentBR);
+      SmartDashboard.putNumber("FL LAST Current",_lastCurrentFL);
   
-      // SmartDashboard.putNumber("FR Current",_liftFrontRight.getOutputCurrent());
-      // SmartDashboard.putNumber("BR Current",_liftBackRight.getOutputCurrent());
-      // SmartDashboard.putNumber("BL Current",_liftBackLeft.getOutputCurrent());
-      // SmartDashboard.putNumber("FL Current",_liftFrontLeft.getOutputCurrent());
+      SmartDashboard.putNumber("FR Current",_liftFrontRight.getOutputCurrent());
+      SmartDashboard.putNumber("BR Current",_liftBackRight.getOutputCurrent());
+      SmartDashboard.putNumber("BL Current",_liftBackLeft.getOutputCurrent());
+      SmartDashboard.putNumber("FL Current",_liftFrontLeft.getOutputCurrent());
   
       // SmartDashboard.putBoolean("END GAME FL UP", _fl_UP);
       // SmartDashboard.putBoolean("END GAME FR UP", _fr_UP);
