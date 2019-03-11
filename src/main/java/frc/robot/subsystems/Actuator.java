@@ -479,25 +479,25 @@ public class Actuator extends Subsystem {
       _liftBackRight.enableCurrentLimit(false);
     }
     
-    if(testloop++ > 10){
+    if(testloop++ > 25){
       testloop =0;
       SmartDashboard.putBoolean("Limit FR UL", _fr_ul.get());
-      SmartDashboard.putBoolean("Limit FR LL", _fr_ll.get());
+      // SmartDashboard.putBoolean("Limit FR LL", _fr_ll.get());
       SmartDashboard.putBoolean("Limit BR UL", _br_ul.get());
-      SmartDashboard.putBoolean("Limit BR LL", _br_ll.get());
+      // SmartDashboard.putBoolean("Limit BR LL", _br_ll.get());
       SmartDashboard.putBoolean("Limit BL UL", _bl_ul.get());
-      SmartDashboard.putBoolean("Limit BL LL", _bl_ll.get());
+      // SmartDashboard.putBoolean("Limit BL LL", _bl_ll.get());
       SmartDashboard.putBoolean("Limit FL UL", _fl_ul.get());
-      SmartDashboard.putBoolean("Limit FL LL", _fl_ll.get());
-      SmartDashboard.putNumber("FR LAST Current",_lastCurrentFR);
-      SmartDashboard.putNumber("BR LAST Current",_lastCurrentBL);
-      SmartDashboard.putNumber("BL LAST Current",_lastCurrentBR);
-      SmartDashboard.putNumber("FL LAST Current",_lastCurrentFL);
+      // SmartDashboard.putBoolean("Limit FL LL", _fl_ll.get());
+      // SmartDashboard.putNumber("FR LAST Current",_lastCurrentFR);
+      // SmartDashboard.putNumber("BR LAST Current",_lastCurrentBL);
+      // SmartDashboard.putNumber("BL LAST Current",_lastCurrentBR);
+      // SmartDashboard.putNumber("FL LAST Current",_lastCurrentFL);
   
-      SmartDashboard.putNumber("FR Current",_liftFrontRight.getOutputCurrent());
-      SmartDashboard.putNumber("BR Current",_liftBackRight.getOutputCurrent());
-      SmartDashboard.putNumber("BL Current",_liftBackLeft.getOutputCurrent());
-      SmartDashboard.putNumber("FL Current",_liftFrontLeft.getOutputCurrent());
+      // SmartDashboard.putNumber("FR Current",_liftFrontRight.getOutputCurrent());
+      // SmartDashboard.putNumber("BR Current",_liftBackRight.getOutputCurrent());
+      // SmartDashboard.putNumber("BL Current",_liftBackLeft.getOutputCurrent());
+      // SmartDashboard.putNumber("FL Current",_liftFrontLeft.getOutputCurrent());
   
       // SmartDashboard.putBoolean("END GAME FL UP", _fl_UP);
       // SmartDashboard.putBoolean("END GAME FR UP", _fr_UP);

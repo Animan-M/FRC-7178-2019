@@ -110,9 +110,19 @@ import edu.wpi.first.wpilibj.AnalogInput;
       if(_ai.getAverageVoltage() < _target - _threshold && _ai.getAverageVoltage() < _highShoot + _threshold) {
         _elevatorLeft.set(_elevatorSpeed);
       } else if (_ai.getAverageVoltage() > _target + _threshold ) {
-        _elevatorLeft.set(-_elevatorSpeed);
+        if(_target == _lowHatch){
+          if(_ai.getAverageVoltage() > _base){
+            _elevatorLeft.set(-_elevatorSpeed);
+          }else{
+            _elevatorLeft.set(0);
+            _target = 0;
+          }
+        }else{
+          _elevatorLeft.set(-_elevatorSpeed);
+        }
       } else {
         _elevatorLeft.set(0);
+        _target = 0;
       }  
     } 
     else {
@@ -238,7 +248,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
     //   }
     // }
 
-    if(testloop++ > 10){
+    if(testloop++ > 25){
       testloop = 0;
      SmartDashboard.putNumber("Accumulator Value", _ai.getAverageVoltage());
      SmartDashboard.putNumber("Target", _target);

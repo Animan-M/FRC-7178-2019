@@ -23,11 +23,13 @@ public class HatchGripper extends Subsystem {
 
   public static DigitalInput _bottomHatch = new DigitalInput(8);
   public static DigitalInput _topHatch = new DigitalInput(9);
-
+  public int testloop = 0;
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new Gripper());
+    testloop = 0;
   }
 
   public void GripperSetUp() {
@@ -46,8 +48,10 @@ public class HatchGripper extends Subsystem {
     } else if (Robot.m_oi.m_Controller2.getRawButton(6) == true) {
       _gripper.set(true);
     }
-
+    if(testloop++ > 25){
+      testloop = 0;
     SmartDashboard.putBoolean("Bottom Hatch Grabber", _bottomHatch.get());
     SmartDashboard.putBoolean("Top Hatch Grabber", _topHatch.get());
+    }
   }
 }
