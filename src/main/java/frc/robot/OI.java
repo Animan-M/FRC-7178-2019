@@ -44,5 +44,6 @@ public class OI {
 
   public XboxController m_Controller1 = new XboxController(0);
   public XboxController m_Controller2 = new XboxController(1);
+  public XboxController m_Controller3 = new XboxController(2);
 
 }

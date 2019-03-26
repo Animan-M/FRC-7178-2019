@@ -32,13 +32,21 @@ public class BackIntake extends Subsystem {
   }
 
   public void Intake() {
-    if(Robot.m_oi.m_Controller2.getRawAxis(3) > 0.3) {
-      _intakeBack.set(-0.75);
-    } else if(Robot.m_oi.m_Controller2.getRawAxis(2) > 0.3 || Robot.m_oi.m_Controller2.getRawAxis(3) > 0.3) {
-      _intakeFront.set(0.75);
-    } else {
-      _intakeBack.set(0);
-      _intakeFront.set(0);
+    if(Robot.m_RobotMap._endGame == true){
+      if(Robot.m_oi.m_Controller2.getRawAxis(3) > 0.3) {
+        _intakeBack.set(-0.75);
+      } else {
+        _intakeBack.set(0);
+      }
+    }else if(Robot.m_RobotMap._endGame == false){
+      if(Robot.m_oi.m_Controller2.getRawAxis(3) > 0.3) {
+        _intakeBack.set(-0.75);
+      } else if(Robot.m_oi.m_Controller2.getRawAxis(2) > 0.3 || Robot.m_oi.m_Controller2.getRawAxis(3) > 0.3) {
+        _intakeFront.set(0.75);
+      } else {
+        _intakeBack.set(0);
+        _intakeFront.set(0);
+      }
     }
   }
 }

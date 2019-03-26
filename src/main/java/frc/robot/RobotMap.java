@@ -52,6 +52,7 @@ public class RobotMap {
   public static Solenoid _upperIntake = new Solenoid(8, 1); //_cargo2
   // Gyro
   // public static ADXL345_SPI _gyro = new ADXL345_SPI(0);
+  public static boolean _endGame = false;
 
   // If you are using multiple modules, make sure to define both the port
   // number and the module. For example you with a rangefinder:

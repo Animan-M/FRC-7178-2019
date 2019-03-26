@@ -14,7 +14,10 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ActuatorDown;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 /**
  * Add your docs here.
  */
@@ -54,6 +57,18 @@ public class Actuator extends Subsystem {
   public static boolean _br_UP = false;
 
   public static int testloop = 0;
+
+  private final int _kTimeoutMs = 30;
+  private final int _kPIDLoopIdx = 0;
+
+  private final double _kp = 0.25;
+  private final double _ki = 0.001;
+  private final double _kd = 10;
+  private final double _kf = 1023.0/7200.0;
+
+  public static boolean cmd = false;
+
+
   //upperlimits 0,2,4,6
   //lowerlimits 1,3,5,7
   //FR, BR, BL, FL
@@ -75,6 +90,58 @@ public class Actuator extends Subsystem {
     _liftBackLeft.setNeutralMode(NeutralMode.Brake);
     _liftFrontRight.setNeutralMode(NeutralMode.Brake);
     _liftBackRight.setNeutralMode(NeutralMode.Brake);
+
+    _liftFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    _liftBackLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    _liftFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+    _liftBackRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+
+    _liftBackLeft.setSensorPhase(true);
+
+    _liftFrontLeft.configNominalOutputForward(0,_kTimeoutMs);
+    _liftFrontLeft.configNominalOutputReverse(0,_kTimeoutMs);
+    _liftFrontLeft.configPeakOutputForward(1,_kTimeoutMs);
+    _liftFrontLeft.configPeakOutputReverse(-1,_kTimeoutMs);
+
+    _liftBackLeft.configNominalOutputForward(0,_kTimeoutMs);
+    _liftBackLeft.configNominalOutputReverse(0,_kTimeoutMs);
+    _liftBackLeft.configPeakOutputForward(1,_kTimeoutMs);
+    _liftBackLeft.configPeakOutputReverse(-1,_kTimeoutMs);
+
+    _liftFrontRight.configNominalOutputForward(0,_kTimeoutMs);
+    _liftFrontRight.configNominalOutputReverse(0,_kTimeoutMs);
+    _liftFrontRight.configPeakOutputForward(1,_kTimeoutMs);
+    _liftFrontRight.configPeakOutputReverse(-1,_kTimeoutMs);
+
+    _liftBackRight.configNominalOutputForward(0,_kTimeoutMs);
+    _liftBackRight.configNominalOutputReverse(0,_kTimeoutMs);
+    _liftBackRight.configPeakOutputForward(1,_kTimeoutMs);
+    _liftBackRight.configPeakOutputReverse(-1,_kTimeoutMs);
+
+    _liftFrontLeft.configAllowableClosedloopError(0, _kPIDLoopIdx, _kTimeoutMs);
+    _liftBackLeft.configAllowableClosedloopError(0, _kPIDLoopIdx, _kTimeoutMs);
+    _liftFrontRight.configAllowableClosedloopError(0, _kPIDLoopIdx, _kTimeoutMs);
+    _liftBackRight.configAllowableClosedloopError(0, _kPIDLoopIdx, _kTimeoutMs);
+
+    _liftFrontLeft.config_kF(_kPIDLoopIdx, _kf, _kTimeoutMs);
+		_liftFrontLeft.config_kP(_kPIDLoopIdx, _kp, _kTimeoutMs);
+		_liftFrontLeft.config_kI(_kPIDLoopIdx, _ki, _kTimeoutMs);
+    _liftFrontLeft.config_kD(_kPIDLoopIdx, _kd, _kTimeoutMs);
+
+    _liftBackLeft.config_kF(_kPIDLoopIdx, _kf, _kTimeoutMs);
+		_liftBackLeft.config_kP(_kPIDLoopIdx, _kp, _kTimeoutMs);
+		_liftBackLeft.config_kI(_kPIDLoopIdx, _ki, _kTimeoutMs);
+    _liftBackLeft.config_kD(_kPIDLoopIdx, _kd, _kTimeoutMs);
+
+    _liftFrontRight.config_kF(_kPIDLoopIdx, _kf, _kTimeoutMs);
+		_liftFrontRight.config_kP(_kPIDLoopIdx, _kp, _kTimeoutMs);
+		_liftFrontRight.config_kI(_kPIDLoopIdx, _ki, _kTimeoutMs);
+    _liftFrontRight.config_kD(_kPIDLoopIdx, _kd, _kTimeoutMs);
+
+    _liftBackRight.config_kF(_kPIDLoopIdx, _kf, _kTimeoutMs);
+		_liftBackRight.config_kP(_kPIDLoopIdx, _kp, _kTimeoutMs);
+		_liftBackRight.config_kI(_kPIDLoopIdx, _ki, _kTimeoutMs);
+    _liftBackRight.config_kD(_kPIDLoopIdx, _kd, _kTimeoutMs);
   }
 
   public void Down() {
@@ -139,9 +206,8 @@ public class Actuator extends Subsystem {
 
     */
 
-
     //check the buttons measure the current.
-    if((Robot.m_oi.m_Controller1.getRawButton(3) == true)) { // Back Down
+    if((Robot.m_oi.m_Controller1.getRawButton(3) == true)) { // Back Down, X button
       if(_br_ul.get() == false){
         _liftBackRight.set(_br_speed);
         _lastCurrentBR = _liftBackRight.getOutputCurrent();
@@ -167,7 +233,7 @@ public class Actuator extends Subsystem {
         _liftBackLeft.set(0.0);
       }
 
-    }else if((Robot.m_oi.m_Controller1.getRawButton(1) == true)) { //All four down
+    }else if((Robot.m_oi.m_Controller1.getRawButton(1) == true)) { //All four down, A button
         _lastCurrentFL = _liftFrontLeft.getOutputCurrent();
         _lastCurrentBL = _liftBackLeft.getOutputCurrent();
         _lastCurrentFR = _liftFrontRight.getOutputCurrent();
@@ -279,8 +345,7 @@ public class Actuator extends Subsystem {
       // _liftBackLeft.enableCurrentLimit(true);
       // _liftFrontRight.enableCurrentLimit(true);
       // _liftBackRight.enableCurrentLimit(true);
-    } else if (Robot.m_oi.m_Controller1.getRawButton(2) == true) {
-      // Back comes up
+    } else if (Robot.m_oi.m_Controller1.getRawButton(2) == true) {  // Back comes up, B button
       /*
       if(_br_ul.get() == false){
         _liftBackRight.set(-_br_speed);
@@ -364,8 +429,7 @@ public class Actuator extends Subsystem {
           _liftFrontLeft.set(-_fl_speed);
       }
 
-    } else if (Robot.m_oi.m_Controller1.getRawButton(8) == true) {
-      //Front comes up
+    } else if (Robot.m_oi.m_Controller1.getRawButton(8) == true) { //All up, Start button
       /*
       if(_fl_ul.get() == false){
         _liftFrontLeft.set(-_fl_speed);
@@ -507,6 +571,174 @@ public class Actuator extends Subsystem {
       // SmartDashboard.putNumber("Gyro x", _gyro.)
   
     }
+
+    // if(Robot.m_oi.m_Controller3.getRawButton(1)){
+    //   _liftBackLeft.set(ControlMode.PercentOutput, 0.3);
+    //   cmd = true;
+    // }
+    // if(Robot.m_oi.m_Controller3.getRawButton(2)){
+    //   _liftBackRight.set(ControlMode.PercentOutput, 0.3);
+    //   cmd = true;
+    // }
+    // if(Robot.m_oi.m_Controller3.getRawButton(3)){
+    //   _liftBackLeft.set(ControlMode.PercentOutput, -0.3);
+    //   cmd = true;
+    // }
+    // if(Robot.m_oi.m_Controller3.getRawButton(4)){
+    //   _liftBackRight.set(ControlMode.PercentOutput, -0.3);
+    //   cmd = true;
+    // }
+    if(Robot.m_oi.m_Controller3.getRawButton(5)){
+      cmd = true;
+      Robot.m_RobotMap._endGame = true;
+      if(_liftFrontLeft.getSelectedSensorPosition() > 0){
+        _liftFrontLeft.set(ControlMode.PercentOutput, -0.3);
+      }else{
+        _liftFrontLeft.set(ControlMode.PercentOutput, 0);
+      }
+      if(_liftBackLeft.getSelectedSensorPosition() > 0){
+        _liftBackLeft.set(ControlMode.PercentOutput, -0.3);
+      }else{
+        _liftBackLeft.set(ControlMode.PercentOutput, 0);
+      }
+      if(_liftFrontRight.getSelectedSensorPosition() > 0){
+        _liftFrontRight.set(ControlMode.PercentOutput, -0.3);
+      }else{
+        _liftFrontRight.set(ControlMode.PercentOutput, 0);
+      }
+      if(_liftBackRight.getSelectedSensorPosition() > 0){
+        _liftBackRight.set(ControlMode.PercentOutput, -0.3);
+      }else{
+        _liftBackRight.set(ControlMode.PercentOutput, 0);
+      }
+    }
+
+    if(Robot.m_oi.m_Controller1.getPOV() == 270){
+      cmd = true;
+      Robot.m_RobotMap._endGame = true;
+      if(_liftFrontLeft.getSelectedSensorPosition() < 146000)
+      {
+        _liftFrontLeft.set(ControlMode.PercentOutput,0.3);
+      }else{
+        _liftFrontLeft.set(ControlMode.PercentOutput,0);
+      }
+      if(_liftBackLeft.getSelectedSensorPosition() < 146000)
+      {
+        _liftBackLeft.set(ControlMode.PercentOutput,0.3);
+      }else{
+        _liftBackLeft.set(ControlMode.PercentOutput,0);
+      }
+      if(_liftFrontRight.getSelectedSensorPosition() < 146000)
+      {
+        _liftFrontRight.set(ControlMode.PercentOutput,0.3);
+      }else{
+        _liftFrontRight.set(ControlMode.PercentOutput,0);
+      }
+      if(_liftBackRight.getSelectedSensorPosition() < 146000)
+      {
+        _liftBackRight.set(ControlMode.PercentOutput,0.3);
+      }else{
+        _liftBackRight.set(ControlMode.PercentOutput,0);
+      }
+    }
+
+    if(Robot.m_oi.m_Controller1.getPOV() == 180){
+      cmd = true;
+      Robot.m_RobotMap._endGame = true;
+      if(_liftFrontLeft.getSelectedSensorPosition() < 100000)
+      {
+        _liftFrontLeft.set(ControlMode.Velocity,8000);
+      }else if(_liftFrontLeft.getSelectedSensorPosition() < 153000){
+        _liftFrontLeft.set(ControlMode.Velocity,4000);
+      }else{
+        _liftFrontLeft.set(ControlMode.PercentOutput,0);
+      }
+      if(_liftBackLeft.getSelectedSensorPosition() < 100000)
+      {
+        _liftBackLeft.set(ControlMode.Velocity,8000);
+      }else if(_liftBackLeft.getSelectedSensorPosition() < 153000){
+        _liftBackLeft.set(ControlMode.Velocity,4000);
+      }else{
+        _liftBackLeft.set(ControlMode.PercentOutput,0);
+      }
+      if(_liftFrontRight.getSelectedSensorPosition() < 100000)
+      {
+        _liftFrontRight.set(ControlMode.Velocity,8000);
+      }else if(_liftFrontRight.getSelectedSensorPosition() < 153000){
+        _liftFrontRight.set(ControlMode.Velocity,4000);
+      }else{
+        _liftFrontRight.set(ControlMode.PercentOutput,0);
+      }
+      if(_liftBackRight.getSelectedSensorPosition() < 100000)
+      {
+        _liftBackRight.set(ControlMode.Velocity,8000);
+      }else if(_liftBackRight.getSelectedSensorPosition() < 153000){
+        _liftBackRight.set(ControlMode.Velocity,4000);
+      }else{
+        _liftBackRight.set(ControlMode.PercentOutput,0);
+      }
+    }
+
+    if(Robot.m_oi.m_Controller1.getPOV() == 90){
+      cmd = true;
+      Robot.m_RobotMap._endGame = true;
+      if(_liftFrontLeft.getSelectedSensorPosition() < 100000)
+      {
+        _liftFrontLeft.set(ControlMode.Velocity,8000);
+      }else if(_liftFrontLeft.getSelectedSensorPosition() < 153000){
+        _liftFrontLeft.set(ControlMode.Velocity,4000);
+      }else{
+        _liftFrontLeft.set(ControlMode.PercentOutput,0);
+      }
+
+      if(_liftBackLeft.getSelectedSensorPosition() > 0){
+        _liftBackLeft.set(ControlMode.PercentOutput, -1.0);
+      }else{
+        _liftBackLeft.set(ControlMode.PercentOutput, 0);
+      }
+
+      if(_liftFrontRight.getSelectedSensorPosition() < 100000)
+      {
+        _liftFrontRight.set(ControlMode.Velocity,8000);
+      }else if(_liftFrontRight.getSelectedSensorPosition() < 153000){
+        _liftFrontRight.set(ControlMode.Velocity,4000);
+      }else{
+        _liftFrontRight.set(ControlMode.PercentOutput,0);
+      }
+      if(_liftBackRight.getSelectedSensorPosition() > 0){
+        _liftBackRight.set(ControlMode.PercentOutput, -1.0);
+      }else{
+        _liftBackRight.set(ControlMode.PercentOutput, 0);
+      }
+    }
+
+    if(cmd = false){
+      _liftFrontLeft.set(ControlMode.PercentOutput,0);
+      _liftBackLeft.set(ControlMode.PercentOutput,0);
+      _liftFrontRight.set(ControlMode.PercentOutput,0);
+      _liftBackRight.set(ControlMode.PercentOutput,0);
+    }
+
+    if(_fl_ul.get()){
+      _liftFrontLeft.setSelectedSensorPosition(0);
+    }
+
+    if(_bl_ul.get()){
+      _liftBackLeft.setSelectedSensorPosition(0);
+    }
+
+    if(_fr_ul.get()){
+      _liftFrontRight.setSelectedSensorPosition(0);
+    }
+
+    if(_br_ul.get()){
+      _liftBackRight.setSelectedSensorPosition(0);
+    }
+
+    SmartDashboard.putNumber("Front Left Encoder", _liftFrontLeft.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Back Left Encoder", _liftBackLeft.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Front Right Encoder", _liftFrontRight.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Back Right Encoder", _liftBackRight.getSelectedSensorPosition());
 
   }
 

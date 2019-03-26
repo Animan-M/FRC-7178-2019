@@ -30,6 +30,7 @@ import frc.robot.subsystems.CargoIntake;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
+  public static RobotMap m_RobotMap;
   public static Actuator m_Actuator;
   public static BackIntake m_BackIntake;
   public static Chassis m_chassis;
