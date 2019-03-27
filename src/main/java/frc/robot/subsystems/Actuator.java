@@ -28,6 +28,7 @@ public class Actuator extends Subsystem {
   public final static WPI_TalonSRX _liftBackLeft = RobotMap._liftBackLeft;
   public final static WPI_TalonSRX _liftFrontRight = RobotMap._liftFrontRight;
   public final static WPI_TalonSRX _liftBackRight = RobotMap._liftBackRight;
+  public static boolean _endGame = RobotMap._endGame;
 
   // public final static ADXL345_SPI _gyro = RobotMap._gyro;
 
@@ -590,7 +591,7 @@ public class Actuator extends Subsystem {
     // }
     if(Robot.m_oi.m_Controller3.getRawButton(5)){
       cmd = true;
-      Robot.m_RobotMap._endGame = true;
+      _endGame = true;
       if(_liftFrontLeft.getSelectedSensorPosition() > 0){
         _liftFrontLeft.set(ControlMode.PercentOutput, -0.3);
       }else{
@@ -615,7 +616,7 @@ public class Actuator extends Subsystem {
 
     if(Robot.m_oi.m_Controller1.getPOV() == 270){
       cmd = true;
-      Robot.m_RobotMap._endGame = true;
+      _endGame = true;
       if(_liftFrontLeft.getSelectedSensorPosition() < 146000)
       {
         _liftFrontLeft.set(ControlMode.PercentOutput,0.3);
@@ -644,7 +645,7 @@ public class Actuator extends Subsystem {
 
     if(Robot.m_oi.m_Controller1.getPOV() == 180){
       cmd = true;
-      Robot.m_RobotMap._endGame = true;
+      _endGame = true;
       if(_liftFrontLeft.getSelectedSensorPosition() < 100000)
       {
         _liftFrontLeft.set(ControlMode.Velocity,8000);
@@ -681,7 +682,7 @@ public class Actuator extends Subsystem {
 
     if(Robot.m_oi.m_Controller1.getPOV() == 90){
       cmd = true;
-      Robot.m_RobotMap._endGame = true;
+      _endGame = true;
       if(_liftFrontLeft.getSelectedSensorPosition() < 100000)
       {
         _liftFrontLeft.set(ControlMode.Velocity,8000);

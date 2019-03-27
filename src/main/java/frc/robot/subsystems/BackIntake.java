@@ -20,6 +20,7 @@ public class BackIntake extends Subsystem {
   // here. Call these from Commands.
   public static WPI_TalonSRX _intakeBack = RobotMap._intakeBack;
   public static WPI_TalonSRX _intakeFront = RobotMap._intakeFront;
+  public static boolean _endGame = RobotMap._endGame;
   
   @Override
   public void initDefaultCommand() {
@@ -32,13 +33,13 @@ public class BackIntake extends Subsystem {
   }
 
   public void Intake() {
-    if(Robot.m_RobotMap._endGame == true){
+    if(_endGame == true){
       if(Robot.m_oi.m_Controller2.getRawAxis(3) > 0.3) {
         _intakeBack.set(-0.75);
       } else {
         _intakeBack.set(0);
       }
-    }else if(Robot.m_RobotMap._endGame == false){
+    }else if(_endGame == false){
       if(Robot.m_oi.m_Controller2.getRawAxis(3) > 0.3) {
         _intakeBack.set(-0.75);
       } else if(Robot.m_oi.m_Controller2.getRawAxis(2) > 0.3 || Robot.m_oi.m_Controller2.getRawAxis(3) > 0.3) {
